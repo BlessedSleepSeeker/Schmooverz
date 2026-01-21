@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GameplayAction" load_steps=2 format=3 uid="uid://buji7c2ig5gp7"]
+
+[ext_resource type="Script" uid="uid://csc6qane275eg" path="res://characters/default/state_machine/gameplay_action.gd" id="1_sgrd1"]
+
+[resource]
+script = ExtResource("1_sgrd1")
+name = "jab"
+button_inputs = Array[String](["attack"])
+min_direction_input = Vector2(-0.2, -0.2)
+max_direction_input = Vector2(0.2, 0.2)
+metadata/_custom_type_script = "uid://csc6qane275eg"

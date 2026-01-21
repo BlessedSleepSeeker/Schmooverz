@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GameplayAction" load_steps=2 format=3 uid="uid://dhdjmi3sy2i1v"]
+
+[ext_resource type="Script" uid="uid://csc6qane275eg" path="res://characters/default/state_machine/gameplay_action.gd" id="1_p0qo2"]
+
+[resource]
+script = ExtResource("1_p0qo2")
+name = "roll_left"
+button_inputs = Array[String](["shield"])
+min_direction_input = Vector2(-1, -0.2)
+max_direction_input = Vector2(-0.2, 0.2)
+metadata/_custom_type_script = "uid://csc6qane275eg"

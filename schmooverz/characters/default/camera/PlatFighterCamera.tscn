@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://j4woadj2nfia"]
+
+[ext_resource type="Script" uid="uid://bt3kd4vgrpqdf" path="res://characters/default/camera/plat_fighter_camera.gd" id="1_johrp"]
+
+[node name="PlatFighterCamera" type="Node3D"]
+script = ExtResource("1_johrp")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+collision_mask = 0
+spring_length = 7.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+current = true

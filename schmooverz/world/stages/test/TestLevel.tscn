@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://xxjwi6brimv"]
+
+[ext_resource type="PackedScene" uid="uid://dl5774hu1otrf" path="res://characters/default/BaseCharacter.tscn" id="1_203f3"]
+[ext_resource type="Material" uid="uid://dt3ebx343rraa" path="res://world/stages/test/textures/grid_ground.tres" id="2_00yep"]
+[ext_resource type="PackedScene" uid="uid://j4woadj2nfia" path="res://characters/default/camera/PlatFighterCamera.tscn" id="2_opxvo"]
+
+[sub_resource type="Environment" id="Environment_opxvo"]
+background_mode = 1
+background_color = Color(0.21570507, 0.6084289, 0.64569443, 1)
+
+[node name="TestLevel" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_opxvo")
+
+[node name="BaseCharacter" parent="." instance=ExtResource("1_203f3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33253193, 0)
+
+[node name="StageBase" type="CSGCombiner3D" parent="."]
+material_override = ExtResource("2_00yep")
+use_collision = true
+collision_mask = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StageBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.974642, 0)
+size = Vector3(42.342285, 11.915283, 1)
+
+[node name="PlatFighterCamera" parent="." instance=ExtResource("2_opxvo")]
+transform = Transform3D(1, 0, 0, 0, 0.9488926, 0.31559938, 0, -0.31559938, 0.9488926, 0, 2.1160984, 0)
+focus = NodePath("../BaseCharacter")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5859765, 0.81032807, 0, -0.81032807, 0.5859765, 0, 3.7614508, 0)

@@ -1,0 +1,112 @@
+[gd_scene load_steps=20 format=3 uid="uid://dl5774hu1otrf"]
+
+[ext_resource type="PackedScene" uid="uid://dg32iuha1ve5" path="res://characters/default/skin/CharacterSkin.tscn" id="1_3jlki"]
+[ext_resource type="Script" uid="uid://byw3h6cu8aju3" path="res://characters/default/base_character.gd" id="1_jc7lb"]
+[ext_resource type="Script" uid="uid://11j1r68kw3sh" path="res://characters/default/state_machine/input_converter.gd" id="2_l2sht"]
+[ext_resource type="Script" uid="uid://b00bfikv2bk3" path="res://characters/default/state_machine/state_machine.gd" id="3_xp1ff"]
+[ext_resource type="Script" uid="uid://dee6q1xcvpuhb" path="res://characters/default/state_machine/states/idle.gd" id="4_want8"]
+[ext_resource type="Script" uid="uid://bpv11or0xsx55" path="res://characters/default/character_physics.gd" id="5_jip32"]
+[ext_resource type="Script" uid="uid://b8mcke3ayagl6" path="res://characters/default/state_machine/states/dash.gd" id="5_whtj7"]
+[ext_resource type="Script" uid="uid://cul6ybyd1l21s" path="res://characters/default/state_machine/states/run.gd" id="6_jip32"]
+[ext_resource type="Script" uid="uid://crwemqh24rpeh" path="res://characters/default/state_machine/states/crouch.gd" id="9_whtj7"]
+[ext_resource type="Script" uid="uid://brmhf51kuti2f" path="res://characters/default/state_machine/states/jumpsquat.gd" id="10_3my5x"]
+[ext_resource type="Script" uid="uid://ci2kcri4u3pvj" path="res://characters/default/state_machine/states/fullhop.gd" id="11_i3vkc"]
+[ext_resource type="Script" uid="uid://134hcpsnpeg3" path="res://characters/default/state_machine/states/double_jump.gd" id="12_hdt70"]
+[ext_resource type="Script" uid="uid://igaxuy1h4wob" path="res://characters/default/state_machine/states/fall.gd" id="13_rwyh5"]
+[ext_resource type="Script" uid="uid://07y5jgjqfl4w" path="res://characters/default/state_machine/states/land.gd" id="14_4blb1"]
+[ext_resource type="Script" uid="uid://dq6cedyenlu2j" path="res://characters/default/state_machine/states/shield.gd" id="15_t68dc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jip32"]
+radius = 0.26171875
+height = 1.8416748
+
+[sub_resource type="Resource" id="Resource_l2sht"]
+script = ExtResource("5_jip32")
+metadata/_custom_type_script = "uid://bpv11or0xsx55"
+
+[sub_resource type="Resource" id="Resource_lxfqc"]
+script = ExtResource("5_jip32")
+metadata/_custom_type_script = "uid://bpv11or0xsx55"
+
+[sub_resource type="Resource" id="Resource_jip32"]
+script = ExtResource("5_jip32")
+metadata/_custom_type_script = "uid://bpv11or0xsx55"
+
+[node name="BaseCharacter" type="CharacterBody3D"]
+script = ExtResource("1_jc7lb")
+
+[node name="InputConverter" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_l2sht")
+metadata/_custom_type_script = "uid://11j1r68kw3sh"
+
+[node name="GroundCollision" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9210224, 0.13701028)
+shape = SubResource("CapsuleShape3D_jip32")
+
+[node name="CharacterSkin" parent="." instance=ExtResource("1_3jlki")]
+unique_name_in_owner = true
+
+[node name="StateMachine" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_xp1ff")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_want8")
+fidget_chance = 0
+physics_parameters = SubResource("Resource_l2sht")
+
+[node name="Dash" type="Node" parent="StateMachine"]
+script = ExtResource("5_whtj7")
+has_set_frame_duration = true
+set_frame_duration = 20
+
+[node name="Run" type="Node" parent="StateMachine"]
+script = ExtResource("6_jip32")
+physics_parameters = SubResource("Resource_lxfqc")
+
+[node name="Crouch" type="Node" parent="StateMachine"]
+script = ExtResource("9_whtj7")
+physics_parameters = SubResource("Resource_jip32")
+
+[node name="JumpSquat" type="Node" parent="StateMachine"]
+script = ExtResource("10_3my5x")
+
+[node name="ShortHop" type="Node" parent="StateMachine"]
+
+[node name="FullHop" type="Node" parent="StateMachine"]
+script = ExtResource("11_i3vkc")
+
+[node name="DoubleJump" type="Node" parent="StateMachine"]
+script = ExtResource("12_hdt70")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("13_rwyh5")
+
+[node name="Land" type="Node" parent="StateMachine"]
+script = ExtResource("14_4blb1")
+
+[node name="Jab" type="Node" parent="StateMachine"]
+
+[node name="Jab2" type="Node" parent="StateMachine"]
+
+[node name="Jab3" type="Node" parent="StateMachine"]
+
+[node name="Nair" type="Node" parent="StateMachine"]
+
+[node name="DashAttack" type="Node" parent="StateMachine"]
+
+[node name="USpec" type="Node" parent="StateMachine"]
+
+[node name="Shield" type="Node" parent="StateMachine"]
+script = ExtResource("15_t68dc")
+
+[node name="RollLeft" type="Node" parent="StateMachine"]
+
+[node name="RollRight" type="Node" parent="StateMachine"]
+
+[node name="Flinch" type="Node" parent="StateMachine"]
+
+[node name="Tumble" type="Node" parent="StateMachine"]

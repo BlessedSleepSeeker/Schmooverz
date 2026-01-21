@@ -1,0 +1,108 @@
+[gd_scene load_steps=18 format=3 uid="uid://dg32iuha1ve5"]
+
+[ext_resource type="Script" uid="uid://dcqxw1daofbil" path="res://characters/default/skin/character_skin.gd" id="1_ndr2y"]
+[ext_resource type="PackedScene" uid="uid://42d6qi3to0gm" path="res://characters/default/skin/monk.gltf" id="1_vunlt"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k55fv"]
+animation = &"Crouch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ndr2y"]
+animation = &"Dash"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1ccq6"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ch54k"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ndr2y"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k55fv"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nc1ug"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l3ish"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ufuaa"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_75s7t"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s1r0t"]
+xfade_time = 0.05
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w8x5d"]
+xfade_time = 0.05
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1ccq6"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_k55fv"]
+states/Crouch/node = SubResource("AnimationNodeAnimation_k55fv")
+states/Crouch/position = Vector2(494, 100)
+states/Dash/node = SubResource("AnimationNodeAnimation_ndr2y")
+states/Dash/position = Vector2(459, -16)
+states/Idle/node = SubResource("AnimationNodeAnimation_1ccq6")
+states/Idle/position = Vector2(309, 97)
+states/Run/node = SubResource("AnimationNodeAnimation_ch54k")
+states/Run/position = Vector2(309, -16)
+states/Start/position = Vector2(206, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ndr2y"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_k55fv"), "Dash", "Run", SubResource("AnimationNodeStateMachineTransition_nc1ug"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_l3ish"), "Idle", "Crouch", SubResource("AnimationNodeStateMachineTransition_ufuaa"), "Run", "Crouch", SubResource("AnimationNodeStateMachineTransition_75s7t"), "Dash", "Crouch", SubResource("AnimationNodeStateMachineTransition_s1r0t"), "Crouch", "Dash", SubResource("AnimationNodeStateMachineTransition_w8x5d"), "Crouch", "Idle", SubResource("AnimationNodeStateMachineTransition_1ccq6")]
+graph_offset = Vector2(-257, -58)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nc1ug"]
+graph_offset = Vector2(-426, 117)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_k55fv")
+nodes/StateMachine/position = Vector2(-20, 140)
+node_connections = [&"output", 0, &"StateMachine"]
+
+[node name="CharacterSkin" type="Node3D"]
+script = ExtResource("1_ndr2y")
+
+[node name="MonkMesh" parent="." instance=ExtResource("1_vunlt")]
+
+[node name="GroundedAngle" parent="MonkMesh" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.9999933, 0.003638398, 0, -0.003638398, 0.9999933, 0, -0.4375, 0)
+
+[node name="Torso" parent="MonkMesh/GroundedAngle" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.96592575, -0.258819, 0, 0.258819, 0.96592575, 0, 1.046875, 0.09375)
+
+[node name="RightLeg" parent="MonkMesh/GroundedAngle/Torso" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.49999994, 0.8660254, 0, -0.8660254, 0.49999994, 0.125, -0.296875, 0)
+
+[node name="mollet2" parent="MonkMesh/GroundedAngle/Torso/RightLeg" index="1"]
+transform = Transform3D(1, 0, 0, 0, -0.64278764, -0.76604444, 0, 0.76604444, -0.64278764, 0, -0.34375, 0)
+
+[node name="LeftLeg" parent="MonkMesh/GroundedAngle/Torso" index="3"]
+transform = Transform3D(1, 0, 0, 0, 0.5372997, 0.8433914, 0, -0.8433914, 0.5372997, -0.125, -0.296875, 0)
+
+[node name="Mollet" parent="MonkMesh/GroundedAngle/Torso/LeftLeg" index="1"]
+transform = Transform3D(1, 0, 0, 0, -0.64278764, -0.76604444, 0, 0.76604444, -0.64278764, 0, -0.34375, 0)
+
+[node name="LeftArm" parent="MonkMesh/GroundedAngle/Torso" index="4"]
+transform = Transform3D(0.976296, 0.0023624448, 0.21642655, -0.21643943, 0.010656233, 0.9762379, 1.490116e-08, -0.9999404, 0.0109149655, -0.240625, 0.18125, -0.009375)
+
+[node name="avant-bras" parent="MonkMesh/GroundedAngle/Torso/LeftArm" index="1"]
+transform = Transform3D(0.3826834, -0.9238794, 0, 0.92387944, 0.38268337, 0, 0, 0, 0.99999994, 0, -0.265625, 0)
+
+[node name="RightArm" parent="MonkMesh/GroundedAngle/Torso" index="5"]
+transform = Transform3D(0.9800044, -0.15327531, -0.12687781, 0.15188132, 0.16430078, 0.9746472, -0.12854321, -0.974429, 0.18429515, 0.240625, 0.18125, -0.009375)
+
+[node name="avant-bras2" parent="MonkMesh/GroundedAngle/Torso/RightArm" index="1"]
+transform = Transform3D(0.13052623, 0.99144477, 0, -0.99144477, 0.13052623, 0, 0, 0, 1, 0, -0.265625, 0)
+
+[node name="head" parent="MonkMesh/GroundedAngle/Torso" index="6"]
+transform = Transform3D(1, 0, 0, 0, 0.9988829, -0.04725404, 0, 0.04725404, 0.9988829, 0, 0.6146115, -0.08518277)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/../MonkMesh")
+tree_root = SubResource("AnimationNodeBlendTree_nc1ug")
+anim_player = NodePath("../MonkMesh/AnimationPlayer")
+
+[editable path="MonkMesh"]

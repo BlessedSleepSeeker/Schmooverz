@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="GameplayAction" load_steps=2 format=3 uid="uid://pvacjh1xwhms"]
+
+[ext_resource type="Script" uid="uid://csc6qane275eg" path="res://characters/default/state_machine/gameplay_action.gd" id="1_qttrn"]
+
+[resource]
+script = ExtResource("1_qttrn")
+name = "dash_attack"
+button_inputs = Array[String](["attack"])
+direction_matter = false
+min_direction_input = Vector2(-0.2, -0.2)
+max_direction_input = Vector2(0.2, 0.2)
+metadata/_custom_type_script = "uid://csc6qane275eg"
