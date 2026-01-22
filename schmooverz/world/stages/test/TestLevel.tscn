@@ -25,8 +25,25 @@ collision_mask = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.974642, 0)
 size = Vector3(42.342285, 11.915283, 1)
 
+[node name="StagePlatforms" type="CSGCombiner3D" parent="."]
+material_override = ExtResource("2_00yep")
+use_collision = true
+collision_mask = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StagePlatforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.135742, 3.925671, 0)
+size = Vector3(4.116211, 0.418396, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="StagePlatforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4613447, 3.9909177, 0)
+size = Vector3(4.116211, 0.28790283, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="StagePlatforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8913026, 7.625467, 0)
+size = Vector3(4.116211, 0.34588623, 1)
+
 [node name="PlatFighterCamera" parent="." instance=ExtResource("2_opxvo")]
-transform = Transform3D(1, 0, 0, 0, 0.9488926, 0.31559938, 0, -0.31559938, 0.9488926, 0, 2.1160984, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9922107, 0.12457132, 0, -0.12457132, 0.9922107, 0, 2.1160984, 0)
 focus = NodePath("../BaseCharacter")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cjl0n4o15nkmc"]
+
+[ext_resource type="Shader" uid="uid://dwq8vxycr5vm8" path="res://characters/default/skin/shaders/shield/shield.gdshader" id="1_itmdv"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_itmdv"]
+noise_type = 0
+frequency = 0.006
+fractal_lacunarity = 3.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_77qih"]
+noise = SubResource("FastNoiseLite_itmdv")
+seamless = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_itmdv")
+shader_parameter/speed = Vector2(0.2, 0.2)
+shader_parameter/barrier_color = Color(0, 0.80834866, 0.9618769, 1)
+shader_parameter/barrier_force = 1.0
+shader_parameter/barrier_noise_force = 0.6
+shader_parameter/barrier_fog_noise_force = 0.0
+shader_parameter/barrier_noise = SubResource("NoiseTexture2D_77qih")

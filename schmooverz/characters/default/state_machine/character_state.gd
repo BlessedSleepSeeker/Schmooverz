@@ -8,20 +8,22 @@ var character: CharacterInstance
 @export var apply_gravity: bool = true
 @export var handle_movements_input: bool = true
 @export var should_play_animation_on_enter: bool = true
-@export var orient_sprite_in_h_direction: bool = true
+@export var flush_inputs_on_enter: bool = false
 @export var has_set_frame_duration: bool = false
 @export var set_frame_duration: int = 0
 
 @export_group("Parameters")
-@export var physics_parameters: CharacterPhysics = CharacterPhysics.new()
+#@export var physics_parameters: CharacterPhysics = CharacterPhysics.new()
+@export var gameplay_action: GameplayAction = null
 # @export var camera_parameters: CameraParameters = CameraParameters.new()
 
-@onready var saved_max_speed: float = physics_parameters.MAX_SPEED
+@onready var saved_max_speed: float = 0
 
 var input_converter: InputConverter = null
 
 func _ready() -> void:
 	character = owner as CharacterInstance
+	saved_max_speed = character.physics_parameters.MAX_SPEED
 
 var frame_count: int = 0
 var first_actionable_frame: int = 0
@@ -29,6 +31,8 @@ var first_actionable_frame: int = 0
 func enter(_msg := {}) -> void:
 	if should_play_animation_on_enter:
 		play_animation()
+	if flush_inputs_on_enter:
+		gameplay_action.flush_buffer_for_actions()
 	frame_count = 0
 
 
@@ -49,17 +53,17 @@ func physics_update(_delta: float, move_character: bool = true) -> void:
 		## If we have no movement, stop using acceleration and use friction instead.
 		## The more acceleration we have, the faster we accelerate.
 		## The more friction we have, the faster we decelerate.
-		if handle_movements_input:
-			if input_converter.stick_position.x == 0.0:
-				character.velocity = character.velocity.move_toward(character.direction * physics_parameters.MAX_SPEED, physics_parameters.FRICTION * _delta)
-			else:
-				character.velocity = character.velocity.move_toward(character.direction * physics_parameters.MAX_SPEED, physics_parameters.ACCELERATION * _delta)
+		# if handle_movements_input:
+		# 	if input_converter.stick_position.x == 0.0:
+		# 		character.velocity = character.velocity.move_toward(character.direction * character.physics_parameters.MAX_SPEED, character.physics_parameters.FRICTION * _delta)
+		# 	else:
+		# 		character.velocity = character.velocity.move_toward(character.direction * character.physics_parameters.MAX_SPEED, character.physics_parameters.ACCELERATION * _delta)
 
 		## Incorporating vertical velocity back into the mix.
 		character.velocity.y = y_velocity
 
 		if apply_gravity:
-			character.velocity.y += physics_parameters.GRAVITY * _delta
+			character.velocity.y += character.physics_parameters.GRAVITY * _delta
 
 		if move_character:
 			character.move_and_slide()
@@ -71,8 +75,6 @@ func physics_update(_delta: float, move_character: bool = true) -> void:
 	frame_count += 1
 	if frame_count == set_frame_duration:
 		on_frame_count_reached()
-	if orient_sprite_in_h_direction:
-		character.orient_skin()
 
 func can_act_out_of_state() -> bool:
 	return frame_count >= first_actionable_frame

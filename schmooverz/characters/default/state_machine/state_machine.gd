@@ -14,6 +14,11 @@ func _ready() -> void:
 		if child is CharacterState:
 			child.state_machine = self
 			child.input_converter = owner.input_converter
+	for child in get_children():
+		if child is CharacterState:
+			if child.name == "Shield":
+				child.shield_life_updated.connect(owner.debug_hud.update_shield)
+				child.shield_life_updated.connect(owner.skin.shield_vfx.update_shield_health)
 	state.enter()
 
 func _input(event: InputEvent) -> void:
@@ -27,6 +32,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	state.physics_update(delta)
+	owner.debug_hud.update_state(state.name, state.frame_count, state.set_frame_duration)
 
 func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	if not has_node(target_state_name):

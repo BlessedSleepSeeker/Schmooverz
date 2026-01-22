@@ -9,6 +9,7 @@ class_name InputConverter
 	"shield",
 	"jump"
 ]
+
 @export var gameplay_actions: Array[GameplayAction] = [
 	preload("res://characters/default/state_machine/gameplay_actions/dash_attack.tres"),
 	preload("res://characters/default/state_machine/gameplay_actions/ftilt.tres"),

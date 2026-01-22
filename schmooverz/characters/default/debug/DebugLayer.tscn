@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://blveiw6lmj5x"]
+
+[ext_resource type="Script" uid="uid://dbutg0eh4o2c4" path="res://characters/default/debug/debug_layer.gd" id="1_vd8ug"]
+
+[node name="DebugLayer" type="CanvasLayer"]
+script = ExtResource("1_vd8ug")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="InputsList" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "Inputs
+InputsInputs
+Inputs
+Inputs
+Inputs
+Inputs"
+fit_content = true
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StateLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "State"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="ShieldLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "Shield"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="FrameLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "Timer"
+fit_content = true
+horizontal_alignment = 1

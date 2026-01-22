@@ -4,8 +4,8 @@ class_name FollowLimitsCamera
 @export_node_path("CharacterInstance") var focus: NodePath
 @export var pos_x_limit: float = 5
 @export var neg_x_limit: float = 5
-@export var pos_y_limit: float = 5
-@export var neg_y_limit: float = 5
+@export var pos_y_limit: float = 2
+@export var neg_y_limit: float = 3
 
 @export var camera_speed: Vector2 = Vector2(20, 20)
 

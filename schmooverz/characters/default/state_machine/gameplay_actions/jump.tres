@@ -7,6 +7,4 @@ script = ExtResource("1_xy7js")
 name = "jump"
 button_inputs = Array[String](["jump"])
 direction_matter = false
-min_direction_input = Vector2(-0.2, -0.2)
-max_direction_input = Vector2(0.2, 0.2)
 metadata/_custom_type_script = "uid://csc6qane275eg"

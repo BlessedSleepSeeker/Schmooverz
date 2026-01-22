@@ -17,7 +17,7 @@ func physics_update(_delta: float, _move_character: bool = true) -> void:
 		state_machine.transition_to("Dash", {"direction": "right"})
 		return
 	if input_converter.stick_position.y >= 0:
-		state_machine.transition_to("Idle")
+		state_machine.transition_to("CrouchRelease")
 	
 	if input_converter.can_trigger_action("jump"):
 		state_machine.transition_to("JumpSquat")

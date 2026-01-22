@@ -13,10 +13,15 @@ const JOY_DEADZONE: float = 0.2
 var keyboard_timestamps: Dictionary = {}
 var joypad_timestamps: Dictionary = {}
 
+var disabled_actions: Array[String] = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_PAUSABLE
 	
+
+func register_actions_press() -> void:
+	pass
 
 # Called whenever the player makes an input.
 func _input(event: InputEvent) -> void:
@@ -46,6 +51,8 @@ func _input(event: InputEvent) -> void:
 func is_action_press_buffered(action: String) -> bool:
 	# Get the inputs associated with the action. If any one of them was pressed in the last BUFFER_WINDOW milliseconds,
 	# the action is buffered.
+	if disabled_actions.has(action):
+		return false
 	for event in InputMap.action_get_events(action):
 		if event is InputEventKey:
 			var scancode: int = event.physical_keycode if event.physical_keycode != 0 else event.keycode
@@ -75,13 +82,19 @@ func is_action_press_buffered(action: String) -> bool:
 	
 	return false
 
+func disable_action(action: String) -> void:
+	if not disabled_actions.has(action):
+		disabled_actions.append(action)
+
+func enable_action(action: String) -> void:
+	disabled_actions.remove_at(disabled_actions.find(action))
 
 # Records unreasonable timestamps for all the inputs in an action. Called when IsActionPressBuffered returns true, as
 # otherwise it would continue returning true every frame for the rest of the buffer window.
 func _invalidate_action(action: String) -> void:
 	for event in InputMap.action_get_events(action):
 		if event is InputEventKey:
-			var scancode: int = event.keycode
+			var scancode: int = event.keycode if event.keycode != 0 else event.physical_keycode
 			if keyboard_timestamps.has(scancode):
 				keyboard_timestamps[scancode] = 0
 		elif event is InputEventJoypadButton:
@@ -92,6 +105,7 @@ func _invalidate_action(action: String) -> void:
 			var axis_code: String = str(event.axis) + "_" + str(sign(event.axis_value))
 			if joypad_timestamps.has(axis_code):
 				joypad_timestamps[axis_code] = 0
+
 
 func handle_cstick(input_action_mode: String = "attack"):
 	var stick_pos: Vector2 = Vector2.ZERO

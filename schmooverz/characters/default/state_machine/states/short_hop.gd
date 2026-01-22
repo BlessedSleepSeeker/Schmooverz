@@ -1,8 +1,9 @@
 extends CharacterState
 
+
 func enter(_msg = {}):
 	super()
-	character.velocity.y = character.physics_parameters.FULL_HOP_IMPULSE
+	character.velocity.y = character.physics_parameters.SHORT_HOP_IMPULSE
 
 func unhandled_input(_event: InputEvent):
 	super(_event)
