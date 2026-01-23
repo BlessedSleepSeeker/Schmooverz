@@ -48,12 +48,23 @@ func input(_event: InputEvent) -> void:
 func unhandled_input(_event: InputEvent) -> void:
 	pass
 
-func integrate_h_velocity(movement_direction: Vector3, delta: float) -> void:
-	character.velocity = character.velocity.move_toward(movement_direction, delta)
+func integrate_h_velocity(movement_direction: Vector3, step: float) -> void:
+	if character.velocity.x == movement_direction.x:
+		return
+	var _direction: bool = character.velocity.x < movement_direction.x
+	if _direction:
+		character.velocity.x += step
+		if character.velocity.x > movement_direction.x:
+			character.velocity.x = movement_direction.x
+	else:
+		character.velocity.x -= step
+		if character.velocity.x < movement_direction.x:
+			character.velocity.x = movement_direction.x
 
 
 func physics_update(_delta: float, move_character: bool = true) -> void:
-	var h_direction: Vector3 = Vector3(input_converter.stick_position.x, 0, 0)
+	var test: Vector3 = Vector3(10, 10, 10)
+	print(test.move_toward(Vector3.ZERO, 0.5))
 	if default_physics:
 		## Extracting vertical velocity
 		var y_velocity: float = character.velocity.y
@@ -64,13 +75,13 @@ func physics_update(_delta: float, move_character: bool = true) -> void:
 		## The more acceleration we have, the faster we accelerate.
 		## The more friction we have, the faster we decelerate.
 
-		
+		var h_direction: Vector3 = Vector3(input_converter.stick_position.x, 0, 0)
 		match physics_type:
 			PhysicsType.GROUNDED_ALL:
 				if input_converter.stick_position.x == 0.0:
 					integrate_h_velocity(Vector3.ZERO, character.physics_parameters.GROUND_FRICTION)
 				else:
-					integrate_h_velocity(h_direction * character.physics_parameters.MAX_RUN_SPEED, character.physics_parameters.GROUND_ACCELERATION)
+					integrate_h_velocity(h_direction * character.physics_parameters.MAX_RUN_SPEED, character.physics_parameters.GROUND_FRICTION)
 			PhysicsType.GROUNDED_ONLY_FRICTION:
 				integrate_h_velocity(Vector3.ZERO, character.physics_parameters.GROUND_FRICTION)
 			PhysicsType.AERIAL_ALL:

@@ -5,7 +5,7 @@ func enter(_msg = {}):
 
 func calculate_airdodge_vector() -> Vector3:
 	var airdodge_vector: Vector3 = Vector3.ZERO
-	#input_converter.stick_position
+	FramePrint.prt(input_converter.get_cardinal_direction_from_stick())
 
 	return airdodge_vector
 

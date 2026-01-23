@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dl5774hu1otrf"]
+[gd_scene load_steps=29 format=3 uid="uid://dl5774hu1otrf"]
 
 [ext_resource type="PackedScene" uid="uid://dg32iuha1ve5" path="res://characters/default/skin/CharacterSkin.tscn" id="1_3jlki"]
 [ext_resource type="Script" uid="uid://byw3h6cu8aju3" path="res://characters/default/base_character.gd" id="1_jc7lb"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://beemhb6o40ftm" path="res://characters/default/state_machine/states/crouch_start.gd" id="9_l2sht"]
 [ext_resource type="Script" uid="uid://crwemqh24rpeh" path="res://characters/default/state_machine/states/crouch.gd" id="9_whtj7"]
 [ext_resource type="Script" uid="uid://brmhf51kuti2f" path="res://characters/default/state_machine/states/jumpsquat.gd" id="10_3my5x"]
+[ext_resource type="Script" uid="uid://b1ss3myjv13ss" path="res://characters/default/state_machine/states/run_turnaround.gd" id="10_t68dc"]
 [ext_resource type="Script" uid="uid://ci2kcri4u3pvj" path="res://characters/default/state_machine/states/fullhop.gd" id="11_i3vkc"]
 [ext_resource type="Script" uid="uid://eut4oomo84pu" path="res://characters/default/state_machine/states/crouch_release.gd" id="11_qa7di"]
 [ext_resource type="Script" uid="uid://134hcpsnpeg3" path="res://characters/default/state_machine/states/double_jump.gd" id="12_hdt70"]
@@ -54,6 +55,7 @@ shape = SubResource("CapsuleShape3D_jip32")
 
 [node name="CharacterSkin" parent="." instance=ExtResource("1_3jlki")]
 unique_name_in_owner = true
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="DebugLayer" parent="." instance=ExtResource("22_hdt70")]
 unique_name_in_owner = true
@@ -77,6 +79,10 @@ set_frame_duration = 20
 script = ExtResource("6_jip32")
 
 [node name="RunTurnaround" type="Node" parent="StateMachine"]
+script = ExtResource("10_t68dc")
+physics_type = 4
+has_set_frame_duration = true
+set_frame_duration = 22
 
 [node name="CrouchStart" type="Node" parent="StateMachine"]
 script = ExtResource("9_l2sht")

@@ -12,6 +12,7 @@ func enter(_msg := {}) -> void:
 	else:
 		dash_direction = false
 		character.facing_direction = false
+	character.orient_skin()
 	character.velocity.x = character.physics_parameters.DASH_INITIAL_SPEED if dash_direction else -character.physics_parameters.DASH_INITIAL_SPEED
 
 func unhandled_input(_event: InputEvent):

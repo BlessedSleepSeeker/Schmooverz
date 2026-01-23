@@ -33,15 +33,15 @@ class_name CharacterPhysics
 # Frames
 @export var DASH_DURATION: int = 16
 # cm/f
-@export var DASH_INITIAL_SPEED: float = 12
+@export var DASH_INITIAL_SPEED: float = 22
 # cm/f
 @export var DASH_CURVE: Curve = Curve.new()
-@export var MAX_RUN_SPEED: float = 8
+@export var MAX_RUN_SPEED: float = 25.5
 @export var RUN_TURNAROUND_DURATION: int = 20
-@export var RUN_TURNAROUND_ACCEL: float = 5
+@export var RUN_TURNAROUND_ACCELERATION: float = 3
 @export var GROUND_ACCELERATION: float = 20
 # cm/f**2. Higher Value == slows down faster
-@export var GROUND_FRICTION: float = 1
+@export var GROUND_FRICTION: float = 1.0
 #endregion
 
 #region Defensive

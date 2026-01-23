@@ -21,6 +21,17 @@ class_name InputConverter
 	preload("res://characters/default/state_machine/gameplay_actions/uspec.tres"),
 ]
 
+@export var cardinal_directions: Array[Vector2] = [
+	Vector2(-1, 0), # east
+	Vector2(1, 0), # west
+	Vector2(0, 1), # south
+	Vector2(0, -1), # north
+	Vector2(-1, 1), # south east
+	Vector2(-1, -1), # north east
+	Vector2(1, 1), # south west
+	Vector2(1, -1), # north west
+]
+
 var stick_position: Vector2 = Vector2.ZERO
 var triggerable_actions: Array[GameplayAction] = []
 
@@ -28,6 +39,7 @@ func process_current_movement_stick_position() -> void:
 	stick_position = Vector2.ZERO
 	stick_position.x = Input.get_axis("ui_left", "ui_right")
 	stick_position.y = Input.get_axis("ui_down", "ui_up")
+	FramePrint.prt(stick_position)
 
 func aggregate_actions() -> Array[String]:
 	var current_input_actions: Array[String]
@@ -48,6 +60,14 @@ func can_trigger_action(action_name: String) -> bool:
 		if gameplay_action.name == action_name:
 			return true
 	return false
+
+func get_cardinal_direction_from_stick() -> Vector2:
+	var min_distance: float = 10
+	var selected_direction: Vector2 = Vector2.ZERO
+	for cardinal_direction: Vector2 in cardinal_directions:
+		if stick_position.distance_to(cardinal_direction) < min_distance:
+			selected_direction = cardinal_direction
+	return selected_direction
 
 func _physics_process(_delta):
 	process_current_movement_stick_position()

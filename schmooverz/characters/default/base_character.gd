@@ -19,7 +19,6 @@ var raw_input: float = 0.0
 var facing_direction: bool = true:
 	set(value):
 		facing_direction = value
-		orient_skin()
 
 
 func _ready():
