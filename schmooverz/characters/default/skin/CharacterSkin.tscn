@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://dg32iuha1ve5"]
+[gd_scene load_steps=51 format=3 uid="uid://dg32iuha1ve5"]
 
 [ext_resource type="Script" uid="uid://dcqxw1daofbil" path="res://characters/default/skin/character_skin.gd" id="1_ndr2y"]
 [ext_resource type="PackedScene" uid="uid://42d6qi3to0gm" path="res://characters/default/skin/monk.gltf" id="1_vunlt"]
@@ -44,6 +44,10 @@ animation = &"Shield"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s1r0t"]
 animation = &"ShieldBreak"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_einga"]
+animation = &"Shield"
+play_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v2m8s"]
 animation = &"ShortHop"
@@ -108,9 +112,6 @@ xfade_time = 0.05
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bxt2t"]
 xfade_time = 0.4
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ch54k"]
-xfade_time = 0.05
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_167by"]
 xfade_time = 0.1
 
@@ -127,6 +128,11 @@ xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yclrd"]
 xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0y3f0"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yb731"]
+xfade_time = 0.05
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_k55fv"]
 states/Crouch/node = SubResource("AnimationNodeAnimation_nc1ug")
@@ -153,14 +159,16 @@ states/Shield/node = SubResource("AnimationNodeAnimation_75s7t")
 states/Shield/position = Vector2(448, -141)
 states/ShieldBreak/node = SubResource("AnimationNodeAnimation_s1r0t")
 states/ShieldBreak/position = Vector2(116, -65)
+states/ShieldRelease/node = SubResource("AnimationNodeAnimation_einga")
+states/ShieldRelease/position = Vector2(204, -161)
 states/ShortHop/node = SubResource("AnimationNodeAnimation_v2m8s")
 states/ShortHop/position = Vector2(217, 243)
 states/Start/position = Vector2(206, 100)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ndr2y"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_k55fv"), "Dash", "Run", SubResource("AnimationNodeStateMachineTransition_nc1ug"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_l3ish"), "Idle", "CrouchStart", SubResource("AnimationNodeStateMachineTransition_ufuaa"), "Run", "CrouchStart", SubResource("AnimationNodeStateMachineTransition_75s7t"), "Dash", "CrouchStart", SubResource("AnimationNodeStateMachineTransition_s1r0t"), "CrouchStart", "Crouch", SubResource("AnimationNodeStateMachineTransition_w8x5d"), "Crouch", "CrouchRelease", SubResource("AnimationNodeStateMachineTransition_2led8"), "CrouchRelease", "Idle", SubResource("AnimationNodeStateMachineTransition_2sgl7"), "CrouchRelease", "Dash", SubResource("AnimationNodeStateMachineTransition_v2m8s"), "Crouch", "Dash", SubResource("AnimationNodeStateMachineTransition_1ccq6"), "Idle", "JumpSquat", SubResource("AnimationNodeStateMachineTransition_einga"), "Idle", "Shield", SubResource("AnimationNodeStateMachineTransition_eghwf"), "Run", "Shield", SubResource("AnimationNodeStateMachineTransition_k85mq"), "Dash", "Shield", SubResource("AnimationNodeStateMachineTransition_mq6ig"), "CrouchStart", "Shield", SubResource("AnimationNodeStateMachineTransition_x5kyd"), "Crouch", "Shield", SubResource("AnimationNodeStateMachineTransition_wby53"), "CrouchRelease", "Shield", SubResource("AnimationNodeStateMachineTransition_4qod7"), "Shield", "ShieldBreak", SubResource("AnimationNodeStateMachineTransition_0e4wx"), "ShieldBreak", "Idle", SubResource("AnimationNodeStateMachineTransition_bxt2t"), "Shield", "Idle", SubResource("AnimationNodeStateMachineTransition_ch54k"), "JumpSquat", "FullHop", SubResource("AnimationNodeStateMachineTransition_167by"), "JumpSquat", "ShortHop", SubResource("AnimationNodeStateMachineTransition_1yrhe"), "ShortHop", "Fall", SubResource("AnimationNodeStateMachineTransition_8o1es"), "FullHop", "Fall", SubResource("AnimationNodeStateMachineTransition_oc5d4"), "Fall", "Land", SubResource("AnimationNodeStateMachineTransition_lwcgw"), "Land", "Idle", SubResource("AnimationNodeStateMachineTransition_yclrd")]
-graph_offset = Vector2(-321, 80)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ndr2y"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_k55fv"), "Dash", "Run", SubResource("AnimationNodeStateMachineTransition_nc1ug"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_l3ish"), "Idle", "CrouchStart", SubResource("AnimationNodeStateMachineTransition_ufuaa"), "Run", "CrouchStart", SubResource("AnimationNodeStateMachineTransition_75s7t"), "Dash", "CrouchStart", SubResource("AnimationNodeStateMachineTransition_s1r0t"), "CrouchStart", "Crouch", SubResource("AnimationNodeStateMachineTransition_w8x5d"), "Crouch", "CrouchRelease", SubResource("AnimationNodeStateMachineTransition_2led8"), "CrouchRelease", "Idle", SubResource("AnimationNodeStateMachineTransition_2sgl7"), "CrouchRelease", "Dash", SubResource("AnimationNodeStateMachineTransition_v2m8s"), "Crouch", "Dash", SubResource("AnimationNodeStateMachineTransition_1ccq6"), "Idle", "JumpSquat", SubResource("AnimationNodeStateMachineTransition_einga"), "Idle", "Shield", SubResource("AnimationNodeStateMachineTransition_eghwf"), "Run", "Shield", SubResource("AnimationNodeStateMachineTransition_k85mq"), "Dash", "Shield", SubResource("AnimationNodeStateMachineTransition_mq6ig"), "CrouchStart", "Shield", SubResource("AnimationNodeStateMachineTransition_x5kyd"), "Crouch", "Shield", SubResource("AnimationNodeStateMachineTransition_wby53"), "CrouchRelease", "Shield", SubResource("AnimationNodeStateMachineTransition_4qod7"), "Shield", "ShieldBreak", SubResource("AnimationNodeStateMachineTransition_0e4wx"), "ShieldBreak", "Idle", SubResource("AnimationNodeStateMachineTransition_bxt2t"), "JumpSquat", "FullHop", SubResource("AnimationNodeStateMachineTransition_167by"), "JumpSquat", "ShortHop", SubResource("AnimationNodeStateMachineTransition_1yrhe"), "ShortHop", "Fall", SubResource("AnimationNodeStateMachineTransition_8o1es"), "FullHop", "Fall", SubResource("AnimationNodeStateMachineTransition_oc5d4"), "Fall", "Land", SubResource("AnimationNodeStateMachineTransition_lwcgw"), "Land", "Idle", SubResource("AnimationNodeStateMachineTransition_yclrd"), "Shield", "ShieldRelease", SubResource("AnimationNodeStateMachineTransition_0y3f0"), "ShieldRelease", "Idle", SubResource("AnimationNodeStateMachineTransition_yb731")]
+graph_offset = Vector2(-295, -153)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nc1ug"]
-graph_offset = Vector2(-174, 57)
+graph_offset = Vector2(-449, 80)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_k55fv")
 nodes/StateMachine/position = Vector2(-20, 140)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -175,10 +183,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96576905, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.99569774, 0)
 
 [node name="GroundedAngle" parent="CenterPivot/MonkMesh" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.99993706, -0.011216644, 0, 0.011216644, 0.99993706, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.99997115, 0.007584822, 0, -0.007584822, 0.99997115, 0, 0, 0)
 
 [node name="Torso" parent="CenterPivot/MonkMesh/GroundedAngle" index="0"]
-transform = Transform3D(0.9997483, 0, 0.022428151, 0, 0.9999999, 0, -0.022428155, 0, 0.9997482, 0, 0.984375, 0.09375)
+transform = Transform3D(0.9998848, 0, -0.015169203, 0, 0.9999999, 0, 0.015169205, 0, 0.99988467, 0, 0.984375, 0.09375)
 
 [node name="RightLeg" parent="CenterPivot/MonkMesh/GroundedAngle/Torso" index="2"]
 transform = Transform3D(0.99904823, 0.043619387, 0, -0.04361939, 0.9990482, 0, 0, 0, 0.9999999, 0.125, -0.296875, 0)
@@ -190,7 +198,7 @@ transform = Transform3D(0.99904823, -0.043619387, 0, 0.04361939, 0.9990482, 0, 0
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, -0.34375, 0)
 
 [node name="LeftArm" parent="CenterPivot/MonkMesh/GroundedAngle/Torso" index="4"]
-transform = Transform3D(0.11161887, 0.26042736, 0.95901966, -0.7660442, 0.6372882, -0.08390062, -0.63302195, -0.72528666, 0.27063242, -0.240625, 0.18125, -0.009375)
+transform = Transform3D(0.11161887, 0.26042736, 0.95901966, -0.7660442, 0.6372883, -0.08390062, -0.63302195, -0.72528666, 0.27063242, -0.240625, 0.18125, -0.009375)
 
 [node name="avant-bras" parent="CenterPivot/MonkMesh/GroundedAngle/Torso/LeftArm" index="1"]
 transform = Transform3D(0.9999999, 0, 0, 0, -0.08715563, 0.9961946, 0, -0.99619454, -0.08715564, 0, -0.265625, 0)
@@ -202,13 +210,13 @@ transform = Transform3D(0.11161889, -0.26042742, -0.9590194, 0.7660444, 0.637288
 transform = Transform3D(0.9999999, 0, 0, 0, -0.08715564, 0.9961947, 0, -0.9961946, -0.08715565, 0, -0.265625, 0)
 
 [node name="head" parent="CenterPivot/MonkMesh/GroundedAngle/Torso" index="6"]
-transform = Transform3D(0.99752945, 0, -0.07024875, 0, 1, 0, 0.07024875, 0, 0.9975294, 0, 0.61461127, -0.0851825)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 0.61461127, -0.0851825)
 
 [node name="flow1" parent="CenterPivot/MonkMesh/GroundedAngle/Torso/head/headgear" index="1"]
-transform = Transform3D(0.8870108, -0.35371983, -0.29680625, 0.19514339, -0.29539865, 0.9352316, -0.41848642, -0.8874803, -0.1929957, 0, -0.015625, -0.3125)
+transform = Transform3D(0.8870108, -0.35371983, -0.29680622, 0.19514339, -0.29539865, 0.93523157, -0.41848642, -0.8874803, -0.19299568, 0, -0.015625, -0.3125)
 
 [node name="flow2" parent="CenterPivot/MonkMesh/GroundedAngle/Torso/head/headgear" index="2"]
-transform = Transform3D(0.8870108, 0.2810947, 0.36632982, -0.28109488, -0.30069163, 0.9113559, 0.36632988, -0.9113559, -0.18770242, 0.015625, 0.01171875, -0.3125)
+transform = Transform3D(0.8870108, 0.2810947, 0.36632982, -0.28109488, -0.3006916, 0.9113559, 0.36632988, -0.9113559, -0.1877024, 0.015625, 0.01171875, -0.3125)
 
 [node name="ShieldMesh" type="MeshInstance3D" parent="CenterPivot"]
 unique_name_in_owner = true

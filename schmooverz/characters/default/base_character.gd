@@ -13,7 +13,6 @@ class_name CharacterInstance
 
 var direction: Vector3 = Vector3.ZERO
 var raw_input: float = 0.0
-var can_double_jump: bool = true
 
 ## true == right,
 ## false == left

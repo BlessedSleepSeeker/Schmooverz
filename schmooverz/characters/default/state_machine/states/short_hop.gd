@@ -3,18 +3,13 @@ extends CharacterState
 
 func enter(_msg = {}):
 	super()
+	FramePrint.prt(character.global_position.y)
 	character.velocity.y = character.physics_parameters.SHORT_HOP_IMPULSE
 
 func unhandled_input(_event: InputEvent):
 	super(_event)
 
 func physics_update(_delta, _move_character: bool = true):
-	character.direction.x = input_converter.stick_position.x
-
-	if input_converter.stick_position.x == 0.0:
-		character.velocity = character.velocity.move_toward(character.direction * character.physics_parameters.MAX_SPEED, character.physics_parameters.FRICTION * _delta)
-	else:
-		character.velocity = character.velocity.move_toward(character.direction * character.physics_parameters.MAX_SPEED, character.physics_parameters.ACCELERATION * _delta)
 	super(_delta)
 	if not character.is_airborne():
 		state_machine.transition_to("Land")
@@ -22,6 +17,7 @@ func physics_update(_delta, _move_character: bool = true):
 		state_machine.transition_to("DoubleJump")
 	if character.velocity.y < 0:
 		state_machine.transition_to("Fall")
+		FramePrint.prt(character.global_position.y)
 
 func exit():
 	pass

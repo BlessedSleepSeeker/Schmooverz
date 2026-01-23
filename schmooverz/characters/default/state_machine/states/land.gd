@@ -5,7 +5,8 @@ func enter(_msg := {}) -> void:
 	super()
 	if _msg.has("landing_lag"):
 		first_actionable_frame = _msg["landing_lag"]
-	character.can_double_jump = true
+	character.physics_parameters.can_double_jump = true
+	character.physics_parameters.is_fastfalling = true
 
 func unhandled_input(_event: InputEvent):
 	super(_event)

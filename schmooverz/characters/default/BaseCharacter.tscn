@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://dl5774hu1otrf"]
+[gd_scene load_steps=28 format=3 uid="uid://dl5774hu1otrf"]
 
 [ext_resource type="PackedScene" uid="uid://dg32iuha1ve5" path="res://characters/default/skin/CharacterSkin.tscn" id="1_3jlki"]
 [ext_resource type="Script" uid="uid://byw3h6cu8aju3" path="res://characters/default/base_character.gd" id="1_jc7lb"]
+[ext_resource type="Script" uid="uid://bpv11or0xsx55" path="res://characters/default/character_physics.gd" id="2_4blb1"]
 [ext_resource type="Script" uid="uid://11j1r68kw3sh" path="res://characters/default/state_machine/input_converter.gd" id="2_l2sht"]
 [ext_resource type="Script" uid="uid://b00bfikv2bk3" path="res://characters/default/state_machine/state_machine.gd" id="3_xp1ff"]
 [ext_resource type="Script" uid="uid://dee6q1xcvpuhb" path="res://characters/default/state_machine/states/idle.gd" id="4_want8"]
@@ -24,12 +25,22 @@
 [ext_resource type="Script" uid="uid://cdfvnsr6rmdl0" path="res://characters/default/state_machine/states/airdodge.gd" id="23_4blb1"]
 [ext_resource type="Script" uid="uid://bld6pfehed80f" path="res://characters/default/state_machine/states/shield_break.gd" id="23_rwyh5"]
 
+[sub_resource type="Curve" id="Curve_t68dc"]
+_data = [Vector2(0, 1), 0.0, -1.1191607, 0, 0, Vector2(1, 0), -1.1183406, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_xj6o5"]
+script = ExtResource("2_4blb1")
+DASH_CURVE = SubResource("Curve_t68dc")
+metadata/_custom_type_script = "uid://bpv11or0xsx55"
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jip32"]
 radius = 0.26171875
 height = 1.8416748
 
 [node name="BaseCharacter" type="CharacterBody3D"]
 script = ExtResource("1_jc7lb")
+physics_parameters = SubResource("Resource_xj6o5")
 
 [node name="InputConverter" type="Node" parent="."]
 unique_name_in_owner = true
@@ -58,27 +69,34 @@ fidget_chance = 0
 
 [node name="Dash" type="Node" parent="StateMachine"]
 script = ExtResource("5_whtj7")
+physics_type = 4
 has_set_frame_duration = true
 set_frame_duration = 20
 
 [node name="Run" type="Node" parent="StateMachine"]
 script = ExtResource("6_jip32")
 
+[node name="RunTurnaround" type="Node" parent="StateMachine"]
+
 [node name="CrouchStart" type="Node" parent="StateMachine"]
 script = ExtResource("9_l2sht")
+physics_type = 1
 has_set_frame_duration = true
 set_frame_duration = 4
 
 [node name="Crouch" type="Node" parent="StateMachine"]
 script = ExtResource("9_whtj7")
+physics_type = 1
 
 [node name="CrouchRelease" type="Node" parent="StateMachine"]
 script = ExtResource("11_qa7di")
+physics_type = 1
 has_set_frame_duration = true
 set_frame_duration = 5
 
 [node name="JumpSquat" type="Node" parent="StateMachine"]
 script = ExtResource("10_3my5x")
+physics_type = 4
 flush_inputs_on_enter = true
 has_set_frame_duration = true
 set_frame_duration = 4
@@ -86,16 +104,18 @@ gameplay_action = ExtResource("13_31emv")
 
 [node name="ShortHop" type="Node" parent="StateMachine"]
 script = ExtResource("13_qa7di")
+physics_type = 2
 
 [node name="FullHop" type="Node" parent="StateMachine"]
 script = ExtResource("11_i3vkc")
+physics_type = 2
 
 [node name="DoubleJump" type="Node" parent="StateMachine"]
 script = ExtResource("12_hdt70")
+physics_type = 2
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("13_rwyh5")
-apply_gravity = false
 
 [node name="Land" type="Node" parent="StateMachine"]
 script = ExtResource("14_4blb1")
@@ -114,16 +134,19 @@ script = ExtResource("14_4blb1")
 
 [node name="Shield" type="Node" parent="StateMachine"]
 script = ExtResource("15_t68dc")
+physics_type = 1
 flush_inputs_on_enter = true
 gameplay_action = ExtResource("20_i3vkc")
 
 [node name="ShieldRelease" type="Node" parent="StateMachine"]
 script = ExtResource("21_i3vkc")
+physics_type = 1
 has_set_frame_duration = true
 set_frame_duration = 10
 
 [node name="ShieldBreak" type="Node" parent="StateMachine"]
 script = ExtResource("23_rwyh5")
+physics_type = 1
 has_set_frame_duration = true
 set_frame_duration = 180
 

@@ -4,6 +4,7 @@ class_name DashState
 var dash_direction: bool = false
 
 func enter(_msg := {}) -> void:
+	self.set_frame_duration = character.physics_parameters.DASH_DURATION
 	super()
 	if _msg["direction"] == "right":
 		dash_direction = true
@@ -11,12 +12,17 @@ func enter(_msg := {}) -> void:
 	else:
 		dash_direction = false
 		character.facing_direction = false
+	character.velocity.x = character.physics_parameters.DASH_INITIAL_SPEED if dash_direction else -character.physics_parameters.DASH_INITIAL_SPEED
 
 func unhandled_input(_event: InputEvent):
 	super(_event)
 
 func physics_update(_delta: float, _move_character: bool = true) -> void:
-	character.velocity.x = character.physics_parameters.DASH_SPEED if dash_direction else -character.physics_parameters.DASH_SPEED
+	#var sample_percent: float = character.physics_parameters.DASH_CURVE.sample(float(self.frame_count) / self.set_frame_duration)
+	#print("%d / %d = %d (%f)" % [self.frame_count, self.set_frame_duration, float(self.frame_count)/self.set_frame_duration, sample_percent])
+	character.velocity.x = lerpf(character.physics_parameters.DASH_INITIAL_SPEED, character.physics_parameters.MAX_RUN_SPEED, float(self.frame_count) / self.set_frame_duration)
+	if not dash_direction:
+		character.velocity.x *= -1
 	if input_converter.stick_position.x < 0 && dash_direction:
 		state_machine.transition_to("Dash", {"direction": "left"})
 	if input_converter.stick_position.x > 0 && not dash_direction:

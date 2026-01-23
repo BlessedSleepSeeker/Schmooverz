@@ -4,9 +4,18 @@ extends State
 
 var character: CharacterInstance
 
+enum PhysicsType {
+	GROUNDED_ALL,
+	GROUNDED_ONLY_FRICTION,
+	AERIAL_ALL,
+	AERIAL_ONLY_FRICTION,
+	SPECIAL
+}
+
 @export var default_physics: bool = true
 @export var apply_gravity: bool = true
-@export var handle_movements_input: bool = true
+@export var physics_type: PhysicsType = PhysicsType.GROUNDED_ALL
+
 @export var should_play_animation_on_enter: bool = true
 @export var flush_inputs_on_enter: bool = false
 @export var has_set_frame_duration: bool = false
@@ -17,13 +26,10 @@ var character: CharacterInstance
 @export var gameplay_action: GameplayAction = null
 # @export var camera_parameters: CameraParameters = CameraParameters.new()
 
-@onready var saved_max_speed: float = 0
-
 var input_converter: InputConverter = null
 
 func _ready() -> void:
 	character = owner as CharacterInstance
-	saved_max_speed = character.physics_parameters.MAX_SPEED
 
 var frame_count: int = 0
 var first_actionable_frame: int = 0
@@ -42,8 +48,12 @@ func input(_event: InputEvent) -> void:
 func unhandled_input(_event: InputEvent) -> void:
 	pass
 
+func integrate_h_velocity(movement_direction: Vector3, delta: float) -> void:
+	character.velocity = character.velocity.move_toward(movement_direction, delta)
+
+
 func physics_update(_delta: float, move_character: bool = true) -> void:
-	
+	var h_direction: Vector3 = Vector3(input_converter.stick_position.x, 0, 0)
 	if default_physics:
 		## Extracting vertical velocity
 		var y_velocity: float = character.velocity.y
@@ -53,17 +63,33 @@ func physics_update(_delta: float, move_character: bool = true) -> void:
 		## If we have no movement, stop using acceleration and use friction instead.
 		## The more acceleration we have, the faster we accelerate.
 		## The more friction we have, the faster we decelerate.
-		# if handle_movements_input:
-		# 	if input_converter.stick_position.x == 0.0:
-		# 		character.velocity = character.velocity.move_toward(character.direction * character.physics_parameters.MAX_SPEED, character.physics_parameters.FRICTION * _delta)
-		# 	else:
-		# 		character.velocity = character.velocity.move_toward(character.direction * character.physics_parameters.MAX_SPEED, character.physics_parameters.ACCELERATION * _delta)
+
+		
+		match physics_type:
+			PhysicsType.GROUNDED_ALL:
+				if input_converter.stick_position.x == 0.0:
+					integrate_h_velocity(Vector3.ZERO, character.physics_parameters.GROUND_FRICTION)
+				else:
+					integrate_h_velocity(h_direction * character.physics_parameters.MAX_RUN_SPEED, character.physics_parameters.GROUND_ACCELERATION)
+			PhysicsType.GROUNDED_ONLY_FRICTION:
+				integrate_h_velocity(Vector3.ZERO, character.physics_parameters.GROUND_FRICTION)
+			PhysicsType.AERIAL_ALL:
+				if input_converter.stick_position.x == 0.0:
+					integrate_h_velocity(Vector3.ZERO, character.physics_parameters.AIR_FRICTION)
+				else:
+					integrate_h_velocity(h_direction * character.physics_parameters.MAX_HORIZONTAL_AIR_SPEED, character.physics_parameters.AIR_ACCELERATION)
+			PhysicsType.AERIAL_ONLY_FRICTION:
+				integrate_h_velocity(Vector3.ZERO, character.physics_parameters.AIR_FRICTION)
 
 		## Incorporating vertical velocity back into the mix.
 		character.velocity.y = y_velocity
 
 		if apply_gravity:
-			character.velocity.y += character.physics_parameters.GRAVITY * _delta
+			character.velocity.y -= character.physics_parameters.GRAVITY
+			if character.physics_parameters.is_fastfalling:
+				character.velocity.y = clampf(character.velocity.y, -character.physics_parameters.MAX_FAST_FALL_SPEED, 10000)
+			else:
+				character.velocity.y = clampf(character.velocity.y, -character.physics_parameters.MAX_FALL_SPEED, 10000)
 
 		if move_character:
 			character.move_and_slide()

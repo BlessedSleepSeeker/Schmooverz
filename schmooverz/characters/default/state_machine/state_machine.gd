@@ -33,6 +33,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	state.physics_update(delta)
 	owner.debug_hud.update_state(state.name, state.frame_count, state.set_frame_duration)
+	owner.debug_hud.update_position(owner.global_position, owner.velocity)
 
 func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	if not has_node(target_state_name):

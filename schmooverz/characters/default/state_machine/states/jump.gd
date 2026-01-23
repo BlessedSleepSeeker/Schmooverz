@@ -6,9 +6,9 @@ class_name JumpState
 func enter(_msg := {}) -> void:
 	super()
 	if Buffer.is_action_pressed("jump"):
-		character.velocity.y = -physics_parameters.FULL_HOP_IMPULSE
+		character.velocity.y = -character.physics_parameters.FULL_HOP_IMPULSE
 	else:
-		character.velocity.y = -physics_parameters.SHORT_HOP_IMPULSE
+		character.velocity.y = -character.physics_parameters.SHORT_HOP_IMPULSE
 
 func unhandled_input(_event: InputEvent):
 	super(_event)
@@ -19,7 +19,7 @@ func physics_update(_delta: float, _move_character: bool = true) -> void:
 		state_machine.transition_to("Fall")
 	if character.is_on_floor():
 		state_machine.transition_to("Land")
-	if Buffer.is_action_press_buffered("jump") && character.can_double_jump && frame_count > dj_minimum_delay:
+	if Buffer.is_action_press_buffered("jump") && character.physics_parameters.can_double_jump && frame_count > dj_minimum_delay:
 		state_machine.transition_to("DoubleJump")
 
 func exit() -> void:
