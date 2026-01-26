@@ -48,9 +48,14 @@ class_name CharacterPhysics
 @export_group("Defensive")
 @export var WEIGHT: int = 82
 @export var HITSTUN_GRAVITY: float = 1.55
-@export var AIRDODGE_INITIAL_SPEED: float = 27
-@export var AIRDODGE_FRICTION: float = 1.5
 @export var ROLL_INITIAL_SPEED: float = 26.5
+#endregion
+
+#region WaveDash
+@export var AIRDODGE_SPEED: float = 27
+@export var AIRDODGE_FRICTION: float = 1.5
+#endregion
 
 var is_fastfalling: bool = false
 var can_double_jump: bool = true
+var can_airdodge: bool = true

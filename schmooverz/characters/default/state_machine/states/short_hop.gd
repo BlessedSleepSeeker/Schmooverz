@@ -3,7 +3,7 @@ extends CharacterState
 
 func enter(_msg = {}):
 	super()
-	FramePrint.prt(character.global_position.y)
+	#FramePrint.prt(character.global_position.y)
 	character.velocity.y = character.physics_parameters.SHORT_HOP_IMPULSE
 
 func unhandled_input(_event: InputEvent):
@@ -13,11 +13,13 @@ func physics_update(_delta, _move_character: bool = true):
 	super(_delta)
 	if not character.is_airborne():
 		state_machine.transition_to("Land")
-	if Buffer.is_action_press_buffered("jump"):
+	if input_converter.can_trigger_action("jump"):
 		state_machine.transition_to("DoubleJump")
+	if input_converter.can_trigger_action("shield"):
+		state_machine.transition_to("Airdodge")
 	if character.velocity.y < 0:
 		state_machine.transition_to("Fall")
-		FramePrint.prt(character.global_position.y)
+		#FramePrint.prt(character.global_position.y)
 
 func exit():
 	pass

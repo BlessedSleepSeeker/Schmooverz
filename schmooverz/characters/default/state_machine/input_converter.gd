@@ -24,12 +24,12 @@ class_name InputConverter
 @export var cardinal_directions: Array[Vector2] = [
 	Vector2(-1, 0), # east
 	Vector2(1, 0), # west
-	Vector2(0, 1), # south
-	Vector2(0, -1), # north
-	Vector2(-1, 1), # south east
-	Vector2(-1, -1), # north east
-	Vector2(1, 1), # south west
-	Vector2(1, -1), # north west
+	Vector2(0, -1), # south
+	Vector2(0, 1), # north
+	Vector2(-1, -1), # south east
+	Vector2(-1, 1), # north east
+	Vector2(1, -1), # south west
+	Vector2(1, 1), # north west
 ]
 
 var stick_position: Vector2 = Vector2.ZERO
@@ -39,7 +39,7 @@ func process_current_movement_stick_position() -> void:
 	stick_position = Vector2.ZERO
 	stick_position.x = Input.get_axis("ui_left", "ui_right")
 	stick_position.y = Input.get_axis("ui_down", "ui_up")
-	FramePrint.prt(stick_position)
+	#FramePrint.prt(stick_position)
 
 func aggregate_actions() -> Array[String]:
 	var current_input_actions: Array[String]
@@ -67,6 +67,7 @@ func get_cardinal_direction_from_stick() -> Vector2:
 	for cardinal_direction: Vector2 in cardinal_directions:
 		if stick_position.distance_to(cardinal_direction) < min_distance:
 			selected_direction = cardinal_direction
+			min_distance = stick_position.distance_to(cardinal_direction)
 	return selected_direction
 
 func _physics_process(_delta):

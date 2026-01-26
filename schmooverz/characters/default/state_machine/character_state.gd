@@ -48,7 +48,7 @@ func input(_event: InputEvent) -> void:
 func unhandled_input(_event: InputEvent) -> void:
 	pass
 
-func integrate_h_velocity(movement_direction: Vector3, step: float) -> void:
+func move_x_toward_by_frame(movement_direction: Vector3, step: float) -> void:
 	if character.velocity.x == movement_direction.x:
 		return
 	var _direction: bool = character.velocity.x < movement_direction.x
@@ -61,10 +61,24 @@ func integrate_h_velocity(movement_direction: Vector3, step: float) -> void:
 		if character.velocity.x < movement_direction.x:
 			character.velocity.x = movement_direction.x
 
+func move_y_toward_by_frame(movement_direction: Vector3, step: float) -> void:
+	if character.velocity.y == movement_direction.y:
+		return
+	var _direction: bool = character.velocity.y < movement_direction.y
+	if _direction:
+		character.velocity.y += step
+		if character.velocity.y > movement_direction.y:
+			character.velocity.y = movement_direction.y
+	else:
+		character.velocity.y -= step
+		if character.velocity.y < movement_direction.y:
+			character.velocity.y = movement_direction.y
+
+
 
 func physics_update(_delta: float, move_character: bool = true) -> void:
-	var test: Vector3 = Vector3(10, 10, 10)
-	print(test.move_toward(Vector3.ZERO, 0.5))
+	#var test: Vector3 = Vector3(10, 10, 10)
+	#print(test.move_toward(Vector3.ZERO, 0.5))
 	if default_physics:
 		## Extracting vertical velocity
 		var y_velocity: float = character.velocity.y
@@ -79,18 +93,18 @@ func physics_update(_delta: float, move_character: bool = true) -> void:
 		match physics_type:
 			PhysicsType.GROUNDED_ALL:
 				if input_converter.stick_position.x == 0.0:
-					integrate_h_velocity(Vector3.ZERO, character.physics_parameters.GROUND_FRICTION)
+					move_x_toward_by_frame(Vector3.ZERO, character.physics_parameters.GROUND_FRICTION)
 				else:
-					integrate_h_velocity(h_direction * character.physics_parameters.MAX_RUN_SPEED, character.physics_parameters.GROUND_FRICTION)
+					move_x_toward_by_frame(h_direction * character.physics_parameters.MAX_RUN_SPEED, character.physics_parameters.GROUND_FRICTION)
 			PhysicsType.GROUNDED_ONLY_FRICTION:
-				integrate_h_velocity(Vector3.ZERO, character.physics_parameters.GROUND_FRICTION)
+				move_x_toward_by_frame(Vector3.ZERO, character.physics_parameters.GROUND_FRICTION)
 			PhysicsType.AERIAL_ALL:
 				if input_converter.stick_position.x == 0.0:
-					integrate_h_velocity(Vector3.ZERO, character.physics_parameters.AIR_FRICTION)
+					move_x_toward_by_frame(Vector3.ZERO, character.physics_parameters.AIR_FRICTION)
 				else:
-					integrate_h_velocity(h_direction * character.physics_parameters.MAX_HORIZONTAL_AIR_SPEED, character.physics_parameters.AIR_ACCELERATION)
+					move_x_toward_by_frame(h_direction * character.physics_parameters.MAX_HORIZONTAL_AIR_SPEED, character.physics_parameters.AIR_ACCELERATION)
 			PhysicsType.AERIAL_ONLY_FRICTION:
-				integrate_h_velocity(Vector3.ZERO, character.physics_parameters.AIR_FRICTION)
+				move_x_toward_by_frame(Vector3.ZERO, character.physics_parameters.AIR_FRICTION)
 
 		## Incorporating vertical velocity back into the mix.
 		character.velocity.y = y_velocity

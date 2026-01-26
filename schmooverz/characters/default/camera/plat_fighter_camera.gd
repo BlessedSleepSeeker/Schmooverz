@@ -7,7 +7,7 @@ class_name FollowLimitsCamera
 @export var pos_y_limit: float = 2
 @export var neg_y_limit: float = 3
 
-@export var camera_speed: Vector2 = Vector2(20, 20)
+@export var camera_speed: Vector2 = Vector2(10, 10)
 
 
 @onready var focused_node: Node3D = get_node(focus)

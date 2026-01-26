@@ -43,7 +43,8 @@ func on_frame_count_reached() -> void:
 	state_machine.transition_to("Run")
 
 func exit() -> void:
-	FramePrint.prt("Current X Speed : %s" % character.velocity.x)
+	pass
+	#FramePrint.prt("Current X Speed : %s" % character.velocity.x)
 
 func _notification(what: int) -> void:
 	if what == Node.NOTIFICATION_WM_CLOSE_REQUEST || what == Node.NOTIFICATION_WM_GO_BACK_REQUEST:

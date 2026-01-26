@@ -4,7 +4,7 @@ var direction_multiplier: float = 1
 
 func enter(_msg = {}):
 	super()
-	FramePrint.prt(character.velocity.x)
+	#FramePrint.prt(character.velocity.x)
 	self.set_frame_duration = character.physics_parameters.RUN_TURNAROUND_DURATION
 	character.facing_direction = !character.facing_direction
 	if character.facing_direction == true:
@@ -18,9 +18,9 @@ func unhandled_input(_event: InputEvent):
 func physics_update(_delta, _move_character: bool = true):
 	character.velocity.x += (character.physics_parameters.RUN_TURNAROUND_ACCELERATION * direction_multiplier)
 	character.velocity.x = clampf(character.velocity.x, -character.physics_parameters.MAX_RUN_SPEED, character.physics_parameters.MAX_RUN_SPEED)
-	FramePrint.prt(character.velocity.x)
 	super(_delta)
-	FramePrint.prt(character.velocity.x)
+	if input_converter.can_trigger_action("jump"):
+		state_machine.transition_to("JumpSquat")
 
 func exit():
 	character.orient_skin()

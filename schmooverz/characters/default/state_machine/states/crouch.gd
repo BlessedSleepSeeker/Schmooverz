@@ -18,14 +18,15 @@ func physics_update(_delta: float, _move_character: bool = true) -> void:
 		return
 	if input_converter.stick_position.y >= 0:
 		state_machine.transition_to("CrouchRelease")
-	
+	if input_converter.stick_position.y < 0:
+		character.platdrop.emit()
 	if input_converter.can_trigger_action("jump"):
 		state_machine.transition_to("JumpSquat")
 	if input_converter.can_trigger_action("shield"):
 		state_machine.transition_to("Shield")
 
 func exit() -> void:
-	FramePrint.prt("Current X Speed : %s" % character.velocity.x)
+	pass
 
 func _notification(what: int) -> void:
 	if what == Node.NOTIFICATION_WM_CLOSE_REQUEST || what == Node.NOTIFICATION_WM_GO_BACK_REQUEST:

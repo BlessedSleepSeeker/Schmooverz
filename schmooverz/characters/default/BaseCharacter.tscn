@@ -35,11 +35,12 @@ script = ExtResource("2_4blb1")
 DASH_CURVE = SubResource("Curve_t68dc")
 metadata/_custom_type_script = "uid://bpv11or0xsx55"
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jip32"]
-radius = 0.26171875
-height = 1.8416748
+[sub_resource type="BoxShape3D" id="BoxShape3D_t68dc"]
+size = Vector3(0.366, 0.1, 0.389)
 
 [node name="BaseCharacter" type="CharacterBody3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+collision_mask = 4
 script = ExtResource("1_jc7lb")
 physics_parameters = SubResource("Resource_xj6o5")
 
@@ -50,12 +51,11 @@ metadata/_custom_type_script = "uid://11j1r68kw3sh"
 
 [node name="GroundCollision" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9210224, 0.13701028)
-shape = SubResource("CapsuleShape3D_jip32")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_t68dc")
 
 [node name="CharacterSkin" parent="." instance=ExtResource("1_3jlki")]
 unique_name_in_owner = true
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="DebugLayer" parent="." instance=ExtResource("22_hdt70")]
 unique_name_in_owner = true
@@ -166,5 +166,10 @@ set_frame_duration = 180
 
 [node name="Airdodge" type="Node" parent="StateMachine"]
 script = ExtResource("23_4blb1")
+startup = 2
+active_frames = Array[int]([15])
+endlag = 20
+apply_gravity = false
+physics_type = 4
 
 [node name="Wavedash" type="Node" parent="StateMachine"]

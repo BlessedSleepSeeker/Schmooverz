@@ -28,6 +28,10 @@ window/size/viewport_height=1080
 window/size/mode=3
 window/size/borderless=true
 
+[global_group]
+
+NeedPlayerRef=""
+
 [input]
 
 ui_accept={
@@ -117,6 +121,11 @@ shield={
 
 [layer_names]
 
-3d_physics/layer_1="ground"
-3d_physics/layer_2="hurtbox"
-3d_physics/layer_3="hitbox"
+3d_physics/layer_1="player_physics"
+3d_physics/layer_2="entity_physics"
+3d_physics/layer_3="player_ground"
+3d_physics/layer_4="entity_ground"
+3d_physics/layer_5="player_hurtbox"
+3d_physics/layer_6="player_hitboxes"
+3d_physics/layer_7="entity_hurtbox"
+3d_physics/layer_8="entity_hitboxes"

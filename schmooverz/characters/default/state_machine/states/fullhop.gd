@@ -11,8 +11,10 @@ func physics_update(_delta, _move_character: bool = true):
 	super(_delta)
 	if not character.is_airborne():
 		state_machine.transition_to("Land")
-	if Buffer.is_action_press_buffered("jump"):
+	if input_converter.can_trigger_action("jump"):
 		state_machine.transition_to("DoubleJump")
+	if input_converter.can_trigger_action("shield"):
+		state_machine.transition_to("Airdodge")
 	if character.velocity.y < 0:
 		state_machine.transition_to("Fall")
 

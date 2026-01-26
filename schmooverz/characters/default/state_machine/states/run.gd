@@ -11,7 +11,7 @@ func unhandled_input(_event: InputEvent):
 
 func physics_update(_delta: float, _move_character: bool = true) -> void:
 	super(_delta)
-	FramePrint.prt(character.velocity.x)
+	#FramePrint.prt(character.velocity.x)
 	if character.is_airborne():
 		state_machine.transition_to("Fall")
 	if character.velocity == Vector3.ZERO:
@@ -24,6 +24,7 @@ func physics_update(_delta: float, _move_character: bool = true) -> void:
 		state_machine.transition_to("Shield")
 	if input_converter.stick_position.y < 0:
 		state_machine.transition_to("CrouchStart")
+		character.platdrop.emit()
 	if input_converter.stick_position.x < 0 && character.facing_direction == true:
 		state_machine.transition_to("RunTurnaround")
 	if input_converter.stick_position.x > 0 && character.facing_direction == false:
@@ -31,7 +32,7 @@ func physics_update(_delta: float, _move_character: bool = true) -> void:
 	
 
 func exit() -> void:
-	FramePrint.prt(character.velocity.x)
+	pass#FramePrint.prt(character.velocity.x)
 
 func _notification(what: int) -> void:
 	if what == Node.NOTIFICATION_WM_CLOSE_REQUEST || what == Node.NOTIFICATION_WM_GO_BACK_REQUEST:

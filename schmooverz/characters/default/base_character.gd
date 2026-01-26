@@ -20,6 +20,8 @@ var facing_direction: bool = true:
 	set(value):
 		facing_direction = value
 
+signal platdrop
+
 
 func _ready():
 	orient_skin()

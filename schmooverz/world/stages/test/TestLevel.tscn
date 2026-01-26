@@ -1,46 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://xxjwi6brimv"]
+[gd_scene load_steps=7 format=3 uid="uid://xxjwi6brimv"]
 
 [ext_resource type="PackedScene" uid="uid://dl5774hu1otrf" path="res://characters/default/BaseCharacter.tscn" id="1_203f3"]
+[ext_resource type="Script" uid="uid://bbymm3kb2ko0j" path="res://world/stages/test/level.gd" id="1_pqitb"]
 [ext_resource type="Material" uid="uid://dt3ebx343rraa" path="res://world/stages/test/textures/grid_ground.tres" id="2_00yep"]
 [ext_resource type="PackedScene" uid="uid://j4woadj2nfia" path="res://characters/default/camera/PlatFighterCamera.tscn" id="2_opxvo"]
+[ext_resource type="PackedScene" uid="uid://cw44wpwiaa6xv" path="res://world/platforms/Platform.tscn" id="4_kcxxe"]
 
 [sub_resource type="Environment" id="Environment_opxvo"]
 background_mode = 1
 background_color = Color(0.21570507, 0.6084289, 0.64569443, 1)
 
 [node name="TestLevel" type="Node3D"]
+script = ExtResource("1_pqitb")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_opxvo")
 
 [node name="BaseCharacter" parent="." instance=ExtResource("1_203f3")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33253193, 0)
 
 [node name="StageBase" type="CSGCombiner3D" parent="."]
 material_override = ExtResource("2_00yep")
 use_collision = true
+collision_layer = 12
 collision_mask = 0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="StageBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.974642, 0)
 size = Vector3(42.342285, 11.915283, 1)
-
-[node name="StagePlatforms" type="CSGCombiner3D" parent="."]
-material_override = ExtResource("2_00yep")
-use_collision = true
-collision_mask = 0
-
-[node name="CSGBox3D" type="CSGBox3D" parent="StagePlatforms"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.135742, 3.925671, 0)
-size = Vector3(4.116211, 0.418396, 1)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="StagePlatforms"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4613447, 3.9909177, 0)
-size = Vector3(4.116211, 0.28790283, 1)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="StagePlatforms"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8913026, 7.625467, 0)
-size = Vector3(4.116211, 0.34588623, 1)
 
 [node name="PlatFighterCamera" parent="." instance=ExtResource("2_opxvo")]
 transform = Transform3D(1, 0, 0, 0, 0.9922107, 0.12457132, 0, -0.12457132, 0.9922107, 0, 2.1160984, 0)
@@ -48,3 +36,17 @@ focus = NodePath("../BaseCharacter")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5859765, 0.81032807, 0, -0.81032807, 0.5859765, 0, 3.7614508, 0)
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="Platform" parent="Node3D" instance=ExtResource("4_kcxxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.319795, 3.730145, 0)
+lenght = 10.0
+
+[node name="Platform2" parent="Node3D" instance=ExtResource("4_kcxxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9629526, 3.730145, 0)
+lenght = 10.0
+
+[node name="Platform3" parent="Node3D" instance=ExtResource("4_kcxxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7443657, 7.9212003, 0)
+lenght = 10.0
