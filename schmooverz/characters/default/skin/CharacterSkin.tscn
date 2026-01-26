@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://dg32iuha1ve5"]
+[gd_scene load_steps=69 format=3 uid="uid://dg32iuha1ve5"]
 
 [ext_resource type="Script" uid="uid://dcqxw1daofbil" path="res://characters/default/skin/character_skin.gd" id="1_ndr2y"]
 [ext_resource type="PackedScene" uid="uid://42d6qi3to0gm" path="res://characters/default/skin/monk.gltf" id="1_vunlt"]
@@ -8,6 +8,9 @@
 [sub_resource type="SphereMesh" id="SphereMesh_ch54k"]
 radius = 1.0
 height = 2.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k85mq"]
+animation = &"Fall"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nc1ug"]
 animation = &"Crouch"
@@ -20,6 +23,9 @@ animation = &"Crouch"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ndr2y"]
 animation = &"Dash"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mq6ig"]
+animation = &"FullHop"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w8x5d"]
 animation = &"Fall"
@@ -149,7 +155,31 @@ xfade_time = 0.2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o501r"]
 xfade_time = 0.2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n3d21"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b2ifd"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bto8r"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bb3lo"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6s13b"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fedwh"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pts0r"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t241j"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b5ssf"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0vp7k"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ocdfr"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_k55fv"]
+states/Airdodge/node = SubResource("AnimationNodeAnimation_k85mq")
+states/Airdodge/position = Vector2(-2, 285)
 states/Crouch/node = SubResource("AnimationNodeAnimation_nc1ug")
 states/Crouch/position = Vector2(637, 83)
 states/CrouchRelease/node = SubResource("AnimationNodeAnimation_l3ish")
@@ -158,6 +188,8 @@ states/CrouchStart/node = SubResource("AnimationNodeAnimation_k55fv")
 states/CrouchStart/position = Vector2(637, 14)
 states/Dash/node = SubResource("AnimationNodeAnimation_ndr2y")
 states/Dash/position = Vector2(459, -16)
+states/DoubleJump/node = SubResource("AnimationNodeAnimation_mq6ig")
+states/DoubleJump/position = Vector2(78, 380)
 states/Fall/node = SubResource("AnimationNodeAnimation_w8x5d")
 states/Fall/position = Vector2(73, 209)
 states/FullHop/node = SubResource("AnimationNodeAnimation_2led8")
@@ -181,11 +213,10 @@ states/ShieldRelease/position = Vector2(204, -161)
 states/ShortHop/node = SubResource("AnimationNodeAnimation_v2m8s")
 states/ShortHop/position = Vector2(217, 243)
 states/Start/position = Vector2(206, 100)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ndr2y"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_k55fv"), "Dash", "Run", SubResource("AnimationNodeStateMachineTransition_nc1ug"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_l3ish"), "Idle", "CrouchStart", SubResource("AnimationNodeStateMachineTransition_ufuaa"), "Run", "CrouchStart", SubResource("AnimationNodeStateMachineTransition_75s7t"), "Dash", "CrouchStart", SubResource("AnimationNodeStateMachineTransition_s1r0t"), "CrouchStart", "Crouch", SubResource("AnimationNodeStateMachineTransition_w8x5d"), "Crouch", "CrouchRelease", SubResource("AnimationNodeStateMachineTransition_2led8"), "CrouchRelease", "Idle", SubResource("AnimationNodeStateMachineTransition_2sgl7"), "CrouchRelease", "Dash", SubResource("AnimationNodeStateMachineTransition_v2m8s"), "Crouch", "Dash", SubResource("AnimationNodeStateMachineTransition_1ccq6"), "Idle", "JumpSquat", SubResource("AnimationNodeStateMachineTransition_einga"), "Idle", "Shield", SubResource("AnimationNodeStateMachineTransition_eghwf"), "Run", "Shield", SubResource("AnimationNodeStateMachineTransition_k85mq"), "Dash", "Shield", SubResource("AnimationNodeStateMachineTransition_mq6ig"), "CrouchStart", "Shield", SubResource("AnimationNodeStateMachineTransition_x5kyd"), "Crouch", "Shield", SubResource("AnimationNodeStateMachineTransition_wby53"), "CrouchRelease", "Shield", SubResource("AnimationNodeStateMachineTransition_4qod7"), "Shield", "ShieldBreak", SubResource("AnimationNodeStateMachineTransition_0e4wx"), "ShieldBreak", "Idle", SubResource("AnimationNodeStateMachineTransition_bxt2t"), "JumpSquat", "FullHop", SubResource("AnimationNodeStateMachineTransition_167by"), "JumpSquat", "ShortHop", SubResource("AnimationNodeStateMachineTransition_1yrhe"), "ShortHop", "Fall", SubResource("AnimationNodeStateMachineTransition_8o1es"), "FullHop", "Fall", SubResource("AnimationNodeStateMachineTransition_oc5d4"), "Fall", "Land", SubResource("AnimationNodeStateMachineTransition_lwcgw"), "Land", "Idle", SubResource("AnimationNodeStateMachineTransition_yclrd"), "Shield", "ShieldRelease", SubResource("AnimationNodeStateMachineTransition_0y3f0"), "ShieldRelease", "Idle", SubResource("AnimationNodeStateMachineTransition_yb731"), "Run", "RunTurnaround", SubResource("AnimationNodeStateMachineTransition_mu46g"), "RunTurnaround", "Idle", SubResource("AnimationNodeStateMachineTransition_8nm1l"), "RunTurnaround", "Run", SubResource("AnimationNodeStateMachineTransition_mcvgp"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_o501r")]
-graph_offset = Vector2(-445, -139)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ndr2y"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_k55fv"), "Dash", "Run", SubResource("AnimationNodeStateMachineTransition_nc1ug"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_l3ish"), "Idle", "CrouchStart", SubResource("AnimationNodeStateMachineTransition_ufuaa"), "Run", "CrouchStart", SubResource("AnimationNodeStateMachineTransition_75s7t"), "Dash", "CrouchStart", SubResource("AnimationNodeStateMachineTransition_s1r0t"), "CrouchStart", "Crouch", SubResource("AnimationNodeStateMachineTransition_w8x5d"), "Crouch", "CrouchRelease", SubResource("AnimationNodeStateMachineTransition_2led8"), "CrouchRelease", "Idle", SubResource("AnimationNodeStateMachineTransition_2sgl7"), "CrouchRelease", "Dash", SubResource("AnimationNodeStateMachineTransition_v2m8s"), "Crouch", "Dash", SubResource("AnimationNodeStateMachineTransition_1ccq6"), "Idle", "JumpSquat", SubResource("AnimationNodeStateMachineTransition_einga"), "Idle", "Shield", SubResource("AnimationNodeStateMachineTransition_eghwf"), "Run", "Shield", SubResource("AnimationNodeStateMachineTransition_k85mq"), "Dash", "Shield", SubResource("AnimationNodeStateMachineTransition_mq6ig"), "CrouchStart", "Shield", SubResource("AnimationNodeStateMachineTransition_x5kyd"), "Crouch", "Shield", SubResource("AnimationNodeStateMachineTransition_wby53"), "CrouchRelease", "Shield", SubResource("AnimationNodeStateMachineTransition_4qod7"), "Shield", "ShieldBreak", SubResource("AnimationNodeStateMachineTransition_0e4wx"), "ShieldBreak", "Idle", SubResource("AnimationNodeStateMachineTransition_bxt2t"), "JumpSquat", "FullHop", SubResource("AnimationNodeStateMachineTransition_167by"), "JumpSquat", "ShortHop", SubResource("AnimationNodeStateMachineTransition_1yrhe"), "ShortHop", "Fall", SubResource("AnimationNodeStateMachineTransition_8o1es"), "FullHop", "Fall", SubResource("AnimationNodeStateMachineTransition_oc5d4"), "Fall", "Land", SubResource("AnimationNodeStateMachineTransition_lwcgw"), "Land", "Idle", SubResource("AnimationNodeStateMachineTransition_yclrd"), "Shield", "ShieldRelease", SubResource("AnimationNodeStateMachineTransition_0y3f0"), "ShieldRelease", "Idle", SubResource("AnimationNodeStateMachineTransition_yb731"), "Run", "RunTurnaround", SubResource("AnimationNodeStateMachineTransition_mu46g"), "RunTurnaround", "Idle", SubResource("AnimationNodeStateMachineTransition_8nm1l"), "RunTurnaround", "Run", SubResource("AnimationNodeStateMachineTransition_mcvgp"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_o501r"), "Fall", "Airdodge", SubResource("AnimationNodeStateMachineTransition_n3d21"), "ShortHop", "Airdodge", SubResource("AnimationNodeStateMachineTransition_b2ifd"), "FullHop", "Airdodge", SubResource("AnimationNodeStateMachineTransition_bto8r"), "Airdodge", "Fall", SubResource("AnimationNodeStateMachineTransition_bb3lo"), "Airdodge", "Land", SubResource("AnimationNodeStateMachineTransition_6s13b"), "FullHop", "DoubleJump", SubResource("AnimationNodeStateMachineTransition_fedwh"), "ShortHop", "DoubleJump", SubResource("AnimationNodeStateMachineTransition_pts0r"), "Fall", "DoubleJump", SubResource("AnimationNodeStateMachineTransition_t241j"), "Airdodge", "DoubleJump", SubResource("AnimationNodeStateMachineTransition_b5ssf"), "DoubleJump", "Airdodge", SubResource("AnimationNodeStateMachineTransition_0vp7k"), "DoubleJump", "Fall", SubResource("AnimationNodeStateMachineTransition_ocdfr")]
+graph_offset = Vector2(-243, 111)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nc1ug"]
-graph_offset = Vector2(-449, 80)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_k55fv")
 nodes/StateMachine/position = Vector2(-20, 140)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -200,40 +231,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96576905, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.99569774, 0)
 
 [node name="GroundedAngle" parent="CenterPivot/MonkMesh" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.9238794, 0.3826834, 0, -0.3826834, 0.9238794, 0, 0, -0.3125)
+transform = Transform3D(1, 0, 0, 0, 0.9995186, -0.031020315, 0, 0.031020315, 0.9995186, 0, 0, 0)
 
 [node name="Torso" parent="CenterPivot/MonkMesh/GroundedAngle" index="0"]
-transform = Transform3D(0.9999998, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999997, 0, 0.609375, 0.09375)
+transform = Transform3D(0.99807465, 0, 0.062020775, 0, 0.9999999, 0, -0.062020782, 0, 0.99807453, 0, 0.984375, 0.09375)
 
 [node name="RightLeg" parent="CenterPivot/MonkMesh/GroundedAngle/Torso" index="2"]
-transform = Transform3D(1, 0, 0, 0, 0.27065918, 0.9626751, 0, -0.96267515, 0.27065918, 0.125, -0.296875, 0)
-
-[node name="mollet2" parent="CenterPivot/MonkMesh/GroundedAngle/Torso/RightLeg" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.48178944, -0.87628704, 0, 0.87628704, 0.48178944, 0, -0.34375, 0)
+transform = Transform3D(0.99904823, 0.043619387, 0, -0.04361939, 0.9990481, 0, 0, 0, 0.9999998, 0.125, -0.296875, 0)
 
 [node name="LeftLeg" parent="CenterPivot/MonkMesh/GroundedAngle/Torso" index="3"]
-transform = Transform3D(1, 0, 0, 0, 0.69085294, 0.7229952, 0, -0.72299516, 0.690853, -0.125, -0.296875, 0)
+transform = Transform3D(0.99904823, -0.043619387, 0, 0.04361939, 0.9990481, 0, 0, 0, 0.99999994, -0.125, -0.296875, 0)
 
 [node name="Mollet" parent="CenterPivot/MonkMesh/GroundedAngle/Torso/LeftLeg" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.87628704, -0.48178923, 0, 0.48178923, 0.87628704, 0, -0.34375, 0)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, -0.34375, 0)
 
 [node name="LeftArm" parent="CenterPivot/MonkMesh/GroundedAngle/Torso" index="4"]
-transform = Transform3D(0.6378176, 0.7287907, -0.24910264, -0.33171514, 0.5518355, 0.765142, 0.6950921, -0.40538996, 0.5937216, -0.240625, 0.18125, -0.009375)
+transform = Transform3D(0.11161887, 0.26042736, 0.9590196, -0.7660442, 0.6372882, -0.08390062, -0.63302195, -0.72528666, 0.27063242, -0.240625, 0.18125, -0.009375)
 
 [node name="avant-bras" parent="CenterPivot/MonkMesh/GroundedAngle/Torso/LeftArm" index="1"]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.99619454, 0.08715573, 0, -0.08715572, 0.9961946, 0, -0.265625, 0)
+transform = Transform3D(0.9999999, 0, 0, 0, -0.08715563, 0.9961946, 0, -0.99619454, -0.08715564, 0, -0.265625, 0)
 
 [node name="RightArm" parent="CenterPivot/MonkMesh/GroundedAngle/Torso" index="5"]
-transform = Transform3D(0.7859136, -0.61678517, 0.043767363, 0.4727253, 0.5537062, -0.68552154, 0.39858535, 0.5594508, 0.7267352, 0.240625, 0.18125, -0.009375)
+transform = Transform3D(0.111618884, -0.26042742, -0.9590194, 0.7660444, 0.6372884, -0.08390061, 0.63302207, -0.72528684, 0.27063236, 0.240625, 0.18125, -0.009375)
 
 [node name="avant-bras2" parent="CenterPivot/MonkMesh/GroundedAngle/Torso/RightArm" index="1"]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.9990481, 0.043619383, 0, -0.04361938, 0.99904823, 0, -0.265625, 0)
+transform = Transform3D(0.9999999, 0, 0, 0, -0.08715564, 0.9961947, 0, -0.9961946, -0.08715565, 0, -0.265625, 0)
 
 [node name="head" parent="CenterPivot/MonkMesh/GroundedAngle/Torso" index="6"]
-transform = Transform3D(0.36328918, -0.009748646, -0.9316253, 3.11234e-05, 0.9999454, -0.0104514165, 0.9316763, 0.003767892, 0.3632696, 0, 0.61461127, -0.0851825)
-
-[node name="headgear" parent="CenterPivot/MonkMesh/GroundedAngle/Torso/head" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.9961947, -0.08715574, 0, 0.08715574, 0.9961947, 0, 0.02601375, -0.0085675)
+transform = Transform3D(0.99873793, 0, 0.050222438, 0, 1, 0, -0.050222438, 0, 0.99873793, 0, 0.61461127, -0.0851825)
 
 [node name="flow1" parent="CenterPivot/MonkMesh/GroundedAngle/Torso/head/headgear" index="1"]
 transform = Transform3D(0.8870108, -0.35371983, -0.29680622, 0.19514339, -0.29539865, 0.93523157, -0.41848642, -0.8874803, -0.19299568, 0, -0.015625, -0.3125)

@@ -6,7 +6,8 @@ func enter(_msg := {}) -> void:
 	if _msg.has("landing_lag"):
 		first_actionable_frame = _msg["landing_lag"]
 	character.physics_parameters.can_double_jump = true
-	character.physics_parameters.is_fastfalling = true
+	character.physics_parameters.is_fastfalling = false
+	character.physics_parameters.can_airdodge = true
 
 func unhandled_input(_event: InputEvent):
 	super(_event)

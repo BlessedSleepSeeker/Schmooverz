@@ -11,6 +11,8 @@ class_name CharacterInstance
 @onready var debug_hud: CharacterDebugHUD = %DebugLayer
 # @onready var particles_manager: ParticlesManager = %ParticlesManager
 
+@onready var airdodge_snap_area: Area3D = %PlatformAirdodgeSnapArea
+
 var direction: Vector3 = Vector3.ZERO
 var raw_input: float = 0.0
 
@@ -34,3 +36,6 @@ func is_airborne() -> bool:
 
 func orient_skin() -> void:
 	skin.look_to(facing_direction)
+
+func _physics_process(_delta):
+	self.velocity.z = 0

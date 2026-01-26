@@ -7,14 +7,16 @@ class_name FollowLimitsCamera
 @export var pos_y_limit: float = 2
 @export var neg_y_limit: float = 3
 
-@export var camera_speed: Vector2 = Vector2(10, 10)
+@export var camera_speed: Vector2 = Vector2(3, 3)
 
 
 @onready var focused_node: Node3D = get_node(focus)
 
 func _process(delta):
 	if self.global_position.x + pos_x_limit < focused_node.global_position.x || self.global_position.x - neg_x_limit > focused_node.global_position.x:
-		self.global_position.x = move_toward(self.global_position.x, focused_node.global_position.x, camera_speed.x * delta)
+		self.global_position.x = lerpf(self.global_position.x, focused_node.global_position.x, delta * camera_speed.x)
+		
+		# move_toward(self.global_position.x, focused_node.global_position.x, camera_speed.x * delta)
 
 	if self.global_position.y + pos_y_limit < focused_node.global_position.y || self.global_position.y - neg_y_limit > focused_node.global_position.y:
-		self.global_position.y = move_toward(self.global_position.y, focused_node.global_position.y, camera_speed.y * delta)
+		self.global_position.y = lerpf(self.global_position.y, focused_node.global_position.y, delta * camera_speed.y)

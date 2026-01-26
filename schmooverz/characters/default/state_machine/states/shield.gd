@@ -28,8 +28,7 @@ func enter(_msg = {}):
 	super()
 	if not Input.is_action_pressed("shield"):
 		state_machine.transition_to("ShieldRelease")
-	if input_converter.stick_position.y < 0:
-		character.platdrop.emit()
+
 	if character.is_airborne():
 		state_machine.transition_to("Fall")
 
@@ -39,6 +38,8 @@ func unhandled_input(_event: InputEvent):
 		state_machine.transition_to("ShieldRelease")
 	if input_converter.can_trigger_action("jump"):
 		state_machine.transition_to("JumpSquat")
+	if input_converter.stick_position.y < 0:
+		character.platdrop.emit()
 
 func physics_update(_delta, _move_character: bool = true):
 	super(_delta)

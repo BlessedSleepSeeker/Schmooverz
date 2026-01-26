@@ -31,7 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.974642, 0)
 size = Vector3(42.342285, 11.915283, 1)
 
 [node name="PlatFighterCamera" parent="." instance=ExtResource("2_opxvo")]
-transform = Transform3D(1, 0, 0, 0, 0.9922107, 0.12457132, 0, -0.12457132, 0.9922107, 0, 2.1160984, 0)
+transform = Transform3D(1, 0, 0, 0, 0.98159385, 0.19098032, 0, -0.19098032, 0.98159385, 0, 2.1160984, 0)
 focus = NodePath("../BaseCharacter")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

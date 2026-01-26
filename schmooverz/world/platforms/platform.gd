@@ -39,6 +39,6 @@ func _physics_process(_delta):
 
 func set_mask(active_for_player: bool) -> void:
 	if active_for_player:
-		collision_layer = 0b00000000_00000000_00000000_00001100
+		self.set_collision_layer_value(3, true)
 	else:
-		collision_layer = 0b00000000_00000000_00000000_00001000
+		self.set_collision_layer_value(3, false)

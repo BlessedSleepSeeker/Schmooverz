@@ -5,6 +5,7 @@ func enter(_msg := {}) -> void:
 	super()
 	character.physics_parameters.can_double_jump = false
 	character.velocity.y = character.physics_parameters.DOUBLE_JUMP_IMPULSE
+	character.velocity.x = character.physics_parameters.MAX_HORIZONTAL_AIR_SPEED * input_converter.stick_position.x
 	character.skin.spin(0.3)
 
 func unhandled_input(_event: InputEvent):

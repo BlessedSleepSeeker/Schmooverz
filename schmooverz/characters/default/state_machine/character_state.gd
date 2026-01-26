@@ -112,7 +112,7 @@ func physics_update(_delta: float, move_character: bool = true) -> void:
 		if apply_gravity:
 			character.velocity.y -= character.physics_parameters.GRAVITY
 			if character.physics_parameters.is_fastfalling:
-				character.velocity.y = clampf(character.velocity.y, -character.physics_parameters.MAX_FAST_FALL_SPEED, 10000)
+				character.velocity.y = clampf(-character.physics_parameters.FAST_FALL_SPEED, -character.physics_parameters.FAST_FALL_SPEED, 10000)
 			else:
 				character.velocity.y = clampf(character.velocity.y, -character.physics_parameters.MAX_FALL_SPEED, 10000)
 

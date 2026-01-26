@@ -129,3 +129,4 @@ shield={
 3d_physics/layer_6="player_hitboxes"
 3d_physics/layer_7="entity_hurtbox"
 3d_physics/layer_8="entity_hitboxes"
+3d_physics/layer_9="platform_ground_always_active"

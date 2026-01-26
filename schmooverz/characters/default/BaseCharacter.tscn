@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dl5774hu1otrf"]
+[gd_scene load_steps=30 format=3 uid="uid://dl5774hu1otrf"]
 
 [ext_resource type="PackedScene" uid="uid://dg32iuha1ve5" path="res://characters/default/skin/CharacterSkin.tscn" id="1_3jlki"]
 [ext_resource type="Script" uid="uid://byw3h6cu8aju3" path="res://characters/default/base_character.gd" id="1_jc7lb"]
@@ -38,6 +38,9 @@ metadata/_custom_type_script = "uid://bpv11or0xsx55"
 [sub_resource type="BoxShape3D" id="BoxShape3D_t68dc"]
 size = Vector3(0.366, 0.1, 0.389)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_xj6o5"]
+size = Vector3(0.366, 1.4120362, 0.389)
+
 [node name="BaseCharacter" type="CharacterBody3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 collision_mask = 4
@@ -59,6 +62,16 @@ unique_name_in_owner = true
 
 [node name="DebugLayer" parent="." instance=ExtResource("22_hdt70")]
 unique_name_in_owner = true
+
+[node name="PlatformAirdodgeSnapArea" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 256
+
+[node name="SnapCollision" type="CollisionShape3D" parent="PlatformAirdodgeSnapArea"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7060181, 0)
+shape = SubResource("BoxShape3D_xj6o5")
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true

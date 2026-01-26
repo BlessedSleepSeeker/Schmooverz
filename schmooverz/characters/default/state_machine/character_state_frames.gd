@@ -35,13 +35,13 @@ func get_current_active_window(frame_number: int) -> int:
 			if full_count == frame_number:
 				return index
 		index += 1
-	push_error("Frame is not in active frames windows.")
+	push_error("Frame %d is not in active frames windows." % frame_number)
 	return -1
 
 func frame_dispatcher() -> void:
 	if frame_count >= startup + count_active_frames() + endlag:
 		on_frame_count_reached()
-	elif frame_count < startup:
+	elif frame_count <= startup:
 		during_startup()
 	elif frame_count >= startup + count_active_frames():
 		during_endlag()

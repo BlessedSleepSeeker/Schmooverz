@@ -7,7 +7,7 @@ class_name CharacterPhysics
 ## cm/f
 @export var MAX_FALL_SPEED: float = 28.3
 ## cm/f
-@export var MAX_FAST_FALL_SPEED: float = 36.25
+@export var FAST_FALL_SPEED: float = 36.25
 @export_subgroup("Air Drift")
 ## cm/f
 @export var MAX_HORIZONTAL_AIR_SPEED: float = 15.0
@@ -38,7 +38,7 @@ class_name CharacterPhysics
 @export var DASH_CURVE: Curve = Curve.new()
 @export var MAX_RUN_SPEED: float = 25.5
 @export var RUN_TURNAROUND_DURATION: int = 20
-@export var RUN_TURNAROUND_ACCELERATION: float = 3
+@export var RUN_TURNAROUND_ACCELERATION: float = 0.3
 @export var GROUND_ACCELERATION: float = 20
 # cm/f**2. Higher Value == slows down faster
 @export var GROUND_FRICTION: float = 1.0
