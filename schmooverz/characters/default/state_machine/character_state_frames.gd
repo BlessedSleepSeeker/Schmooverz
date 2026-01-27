@@ -7,6 +7,8 @@ class_name CharacterStateFrames
 @export var active_frames: Array[int] = [2]
 ## Frames amount
 @export var endlag: int = 3
+## Frame after endlag started
+@export var iasa_frame: int = 2
 
 func _count_active_frames() -> int:
 	var total_actives: int = 0
@@ -39,6 +41,9 @@ func _frame_dispatcher() -> void:
 			during_active_frame(window_index)
 		else:
 			during_inactive_frame(window_index)
+
+func can_iasa() -> bool:
+	return frame_count >= startup + _count_active_frames() + iasa_frame
 
 func during_startup() -> void:
 	pass

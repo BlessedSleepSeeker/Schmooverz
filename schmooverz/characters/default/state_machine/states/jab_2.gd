@@ -11,8 +11,9 @@ func during_inactive_frame(_index: int):
 
 func during_endlag():
 	super()
-	if input_converter.can_trigger_action("jab"):
-		state_machine.transition_to("Jab3")
+	if can_iasa():
+		if input_converter.can_trigger_action("jab"):
+			state_machine.transition_to("Jab3")
 
 func enter(_msg = {}):
 	super()

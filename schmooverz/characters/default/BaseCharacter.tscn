@@ -29,6 +29,7 @@
 [ext_resource type="Resource" uid="uid://buji7c2ig5gp7" path="res://characters/default/state_machine/gameplay_actions/jab.tres" id="23_6n7n1"]
 [ext_resource type="Script" uid="uid://bld6pfehed80f" path="res://characters/default/state_machine/states/shield_break.gd" id="23_rwyh5"]
 [ext_resource type="Script" uid="uid://bde0sfiwmil5f" path="res://characters/default/hitboxes/hitbox.gd" id="24_h1ln2"]
+[ext_resource type="Script" uid="uid://o7m2p41lgybe" path="res://characters/default/hitboxes/hitbox_group.gd" id="24_iccai"]
 [ext_resource type="Script" uid="uid://n0i81coco3yc" path="res://characters/default/state_machine/states/jab_2.gd" id="25_ofar5"]
 [ext_resource type="Script" uid="uid://c1hpkbdgdlfh7" path="res://characters/default/state_machine/states/jab_3.gd" id="26_iccai"]
 
@@ -160,12 +161,14 @@ physics_type = 2
 script = ExtResource("22_r6xks")
 startup = 3
 endlag = 20
+iasa_frame = 9
 physics_type = 4
 gameplay_action = ExtResource("23_6n7n1")
 
 [node name="HitWindow0" type="Area3D" parent="StateMachine/Jab" unique_id=1702226916]
 collision_layer = 32
 collision_mask = 64
+script = ExtResource("24_iccai")
 
 [node name="JabHitbox0" type="CollisionShape3D" parent="StateMachine/Jab/HitWindow0" unique_id=1052789527]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.779, 1.105, 0)
@@ -175,10 +178,16 @@ script = ExtResource("24_h1ln2")
 
 [node name="Jab2" type="Node3D" parent="StateMachine" unique_id=567301780]
 script = ExtResource("25_ofar5")
+startup = 3
+endlag = 20
+iasa_frame = 9
 
 [node name="HitWindow0" type="Area3D" parent="StateMachine/Jab2" unique_id=1280259158]
+collision_layer = 32
+collision_mask = 64
+script = ExtResource("24_iccai")
 
-[node name="Jab1Hitbox" type="CollisionShape3D" parent="StateMachine/Jab2/HitWindow0" unique_id=2020594200]
+[node name="Jab2Hitbox0" type="CollisionShape3D" parent="StateMachine/Jab2/HitWindow0" unique_id=2020594200]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.871, 1.105, 0)
 shape = SubResource("SphereShape3D_6n7n1")
 debug_color = Color(0.989497, 0, 0.29520148, 0.41960785)
@@ -186,10 +195,16 @@ script = ExtResource("24_h1ln2")
 
 [node name="Jab3" type="Node3D" parent="StateMachine" unique_id=897891792]
 script = ExtResource("26_iccai")
+startup = 3
+endlag = 25
+iasa_frame = 13
 
 [node name="HitWindow0" type="Area3D" parent="StateMachine/Jab3" unique_id=1451272793]
+collision_layer = 32
+collision_mask = 64
+script = ExtResource("24_iccai")
 
-[node name="Jab2Hitbox" type="CollisionShape3D" parent="StateMachine/Jab3/HitWindow0" unique_id=1781381799]
+[node name="Jab3Hitbox0" type="CollisionShape3D" parent="StateMachine/Jab3/HitWindow0" unique_id=1781381799]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.89288247, 0.5743826, 0)
 shape = SubResource("SphereShape3D_ofar5")
 debug_color = Color(0.989497, 0, 0.29520148, 0.41960785)

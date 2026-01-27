@@ -1,6 +1,5 @@
 extends CharacterStateAttack
 
-
 func during_startup() -> void:
 	pass
 
@@ -12,8 +11,9 @@ func during_inactive_frame(_index: int) -> void:
 
 func during_endlag() -> void:
 	super()
-	if input_converter.can_trigger_action("jab"):
-		state_machine.transition_to("Jab2")
+	if can_iasa():
+		if input_converter.can_trigger_action("jab"):
+			state_machine.transition_to("Jab2")
 
 func enter(_msg = {}):
 	super()
