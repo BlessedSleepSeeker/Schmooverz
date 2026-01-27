@@ -1,5 +1,5 @@
 @abstract
-extends Node
+extends Node3D
 class_name State
 
 var state_machine: StateMachine = null

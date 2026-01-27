@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cjl0n4o15nkmc"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cjl0n4o15nkmc"]
 
 [ext_resource type="Shader" uid="uid://dwq8vxycr5vm8" path="res://characters/default/skin/shaders/shield/shield.gdshader" id="1_itmdv"]
 

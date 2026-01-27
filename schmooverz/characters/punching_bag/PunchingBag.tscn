@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://obfi4psu4312"]
+
+[ext_resource type="Script" uid="uid://b7e484riraxip" path="res://characters/punching_bag/punching_bag.gd" id="1_en4ws"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_m8oyl"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m8oyl"]
+
+[node name="PunchingBag" type="CharacterBody3D" unique_id=342280193]
+collision_layer = 66
+collision_mask = 8
+script = ExtResource("1_en4ws")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=745714674]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9892757, 0)
+mesh = SubResource("CapsuleMesh_m8oyl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1364640476]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9892757, 0)
+shape = SubResource("CapsuleShape3D_m8oyl")

@@ -74,7 +74,11 @@ func move_y_toward_by_frame(movement_direction: Vector3, step: float) -> void:
 		if character.velocity.y < movement_direction.y:
 			character.velocity.y = movement_direction.y
 
-
+func flip_hitboxes(direction: bool) -> void:
+	if direction:
+		self.rotation_degrees.y = 0
+	else:
+		self.rotation_degrees.y = 180
 
 func physics_update(_delta: float, move_character: bool = true) -> void:
 	#var test: Vector3 = Vector3(10, 10, 10)

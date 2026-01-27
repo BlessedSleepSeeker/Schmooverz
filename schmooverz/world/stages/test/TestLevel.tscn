@@ -1,52 +1,56 @@
-[gd_scene load_steps=7 format=3 uid="uid://xxjwi6brimv"]
+[gd_scene format=3 uid="uid://xxjwi6brimv"]
 
 [ext_resource type="PackedScene" uid="uid://dl5774hu1otrf" path="res://characters/default/BaseCharacter.tscn" id="1_203f3"]
 [ext_resource type="Script" uid="uid://bbymm3kb2ko0j" path="res://world/stages/test/level.gd" id="1_pqitb"]
 [ext_resource type="Material" uid="uid://dt3ebx343rraa" path="res://world/stages/test/textures/grid_ground.tres" id="2_00yep"]
 [ext_resource type="PackedScene" uid="uid://j4woadj2nfia" path="res://characters/default/camera/PlatFighterCamera.tscn" id="2_opxvo"]
 [ext_resource type="PackedScene" uid="uid://cw44wpwiaa6xv" path="res://world/platforms/Platform.tscn" id="4_kcxxe"]
+[ext_resource type="PackedScene" uid="uid://obfi4psu4312" path="res://characters/punching_bag/PunchingBag.tscn" id="6_eod7b"]
 
 [sub_resource type="Environment" id="Environment_opxvo"]
 background_mode = 1
 background_color = Color(0.21570507, 0.6084289, 0.64569443, 1)
 
-[node name="TestLevel" type="Node3D"]
+[node name="TestLevel" type="Node3D" unique_id=1191007033]
 script = ExtResource("1_pqitb")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1756683037]
 environment = SubResource("Environment_opxvo")
 
-[node name="BaseCharacter" parent="." instance=ExtResource("1_203f3")]
+[node name="BaseCharacter" parent="." unique_id=1518537142 instance=ExtResource("1_203f3")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33253193, 0)
 
-[node name="StageBase" type="CSGCombiner3D" parent="."]
+[node name="StageBase" type="CSGCombiner3D" parent="." unique_id=1694542288]
 material_override = ExtResource("2_00yep")
 use_collision = true
 collision_layer = 12
 collision_mask = 0
 
-[node name="CSGBox3D" type="CSGBox3D" parent="StageBase"]
+[node name="CSGBox3D" type="CSGBox3D" parent="StageBase" unique_id=1276684579]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.974642, 0)
 size = Vector3(42.342285, 11.915283, 1)
 
-[node name="PlatFighterCamera" parent="." instance=ExtResource("2_opxvo")]
+[node name="PlatFighterCamera" parent="." unique_id=1190115159 instance=ExtResource("2_opxvo")]
 transform = Transform3D(1, 0, 0, 0, 0.98159385, 0.19098032, 0, -0.19098032, 0.98159385, 0, 2.1160984, 0)
 focus = NodePath("../BaseCharacter")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2018382314]
 transform = Transform3D(1, 0, 0, 0, 0.5859765, 0.81032807, 0, -0.81032807, 0.5859765, 0, 3.7614508, 0)
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Node3D" type="Node3D" parent="." unique_id=1662365855]
 
-[node name="Platform" parent="Node3D" instance=ExtResource("4_kcxxe")]
+[node name="Platform" parent="Node3D" unique_id=1958729216 instance=ExtResource("4_kcxxe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.319795, 3.730145, 0)
 lenght = 10.0
 
-[node name="Platform2" parent="Node3D" instance=ExtResource("4_kcxxe")]
+[node name="Platform2" parent="Node3D" unique_id=1044818896 instance=ExtResource("4_kcxxe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9629526, 3.730145, 0)
 lenght = 10.0
 
-[node name="Platform3" parent="Node3D" instance=ExtResource("4_kcxxe")]
+[node name="Platform3" parent="Node3D" unique_id=1243516526 instance=ExtResource("4_kcxxe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7443657, 7.9212003, 0)
 lenght = 10.0
+
+[node name="PunchingBag" parent="." unique_id=342280193 instance=ExtResource("6_eod7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.912325, 0, 0)

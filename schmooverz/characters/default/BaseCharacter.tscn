@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dl5774hu1otrf"]
+[gd_scene format=3 uid="uid://dl5774hu1otrf"]
 
 [ext_resource type="PackedScene" uid="uid://dg32iuha1ve5" path="res://characters/default/skin/CharacterSkin.tscn" id="1_3jlki"]
 [ext_resource type="Script" uid="uid://byw3h6cu8aju3" path="res://characters/default/base_character.gd" id="1_jc7lb"]
@@ -22,9 +22,15 @@
 [ext_resource type="Script" uid="uid://dq6cedyenlu2j" path="res://characters/default/state_machine/states/shield.gd" id="15_t68dc"]
 [ext_resource type="Resource" uid="uid://ne8kmvhgocir" path="res://characters/default/state_machine/gameplay_actions/shield.tres" id="20_i3vkc"]
 [ext_resource type="Script" uid="uid://wsprnn5lv804" path="res://characters/default/state_machine/states/shield_release.gd" id="21_i3vkc"]
+[ext_resource type="Script" uid="uid://brqa3emtfnco2" path="res://characters/default/state_machine/states/freefall.gd" id="21_xj6o5"]
 [ext_resource type="PackedScene" uid="uid://blveiw6lmj5x" path="res://characters/default/debug/DebugLayer.tscn" id="22_hdt70"]
+[ext_resource type="Script" uid="uid://bqhs32llaupeh" path="res://characters/default/state_machine/states/jab.gd" id="22_r6xks"]
 [ext_resource type="Script" uid="uid://cdfvnsr6rmdl0" path="res://characters/default/state_machine/states/airdodge.gd" id="23_4blb1"]
+[ext_resource type="Resource" uid="uid://buji7c2ig5gp7" path="res://characters/default/state_machine/gameplay_actions/jab.tres" id="23_6n7n1"]
 [ext_resource type="Script" uid="uid://bld6pfehed80f" path="res://characters/default/state_machine/states/shield_break.gd" id="23_rwyh5"]
+[ext_resource type="Script" uid="uid://bde0sfiwmil5f" path="res://characters/default/hitboxes/hitbox.gd" id="24_h1ln2"]
+[ext_resource type="Script" uid="uid://n0i81coco3yc" path="res://characters/default/state_machine/states/jab_2.gd" id="25_ofar5"]
+[ext_resource type="Script" uid="uid://c1hpkbdgdlfh7" path="res://characters/default/state_machine/states/jab_3.gd" id="26_iccai"]
 
 [sub_resource type="Curve" id="Curve_t68dc"]
 _data = [Vector2(0, 1), 0.0, -1.1191607, 0, 0, Vector2(1, 0), -1.1183406, 0.0, 0, 0]
@@ -41,79 +47,86 @@ size = Vector3(0.366, 0.1, 0.389)
 [sub_resource type="BoxShape3D" id="BoxShape3D_xj6o5"]
 size = Vector3(0.366, 1.4120362, 0.389)
 
-[node name="BaseCharacter" type="CharacterBody3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_6n7n1"]
+radius = 0.3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ofar5"]
+radius = 0.38638464
+
+[node name="BaseCharacter" type="CharacterBody3D" unique_id=1518537142]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 collision_mask = 4
 script = ExtResource("1_jc7lb")
 physics_parameters = SubResource("Resource_xj6o5")
 
-[node name="InputConverter" type="Node" parent="."]
+[node name="InputConverter" type="Node" parent="." unique_id=116864629]
 unique_name_in_owner = true
 script = ExtResource("2_l2sht")
 metadata/_custom_type_script = "uid://11j1r68kw3sh"
 
-[node name="GroundCollision" type="CollisionShape3D" parent="."]
+[node name="GroundCollision" type="CollisionShape3D" parent="." unique_id=546303957]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 shape = SubResource("BoxShape3D_t68dc")
 
-[node name="CharacterSkin" parent="." instance=ExtResource("1_3jlki")]
+[node name="CharacterSkin" parent="." unique_id=587719509 instance=ExtResource("1_3jlki")]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="DebugLayer" parent="." unique_id=522242530 instance=ExtResource("22_hdt70")]
 unique_name_in_owner = true
 
-[node name="DebugLayer" parent="." instance=ExtResource("22_hdt70")]
-unique_name_in_owner = true
-
-[node name="PlatformAirdodgeSnapArea" type="Area3D" parent="."]
+[node name="PlatformAirdodgeSnapArea" type="Area3D" parent="." unique_id=610127340]
 unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 256
 
-[node name="SnapCollision" type="CollisionShape3D" parent="PlatformAirdodgeSnapArea"]
+[node name="SnapCollision" type="CollisionShape3D" parent="PlatformAirdodgeSnapArea" unique_id=420671746]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7060181, 0)
 shape = SubResource("BoxShape3D_xj6o5")
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node3D" parent="." unique_id=1997544755]
 unique_name_in_owner = true
 script = ExtResource("3_xp1ff")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine"]
+[node name="Idle" type="Node3D" parent="StateMachine" unique_id=1709433755]
 script = ExtResource("4_want8")
 fidget_chance = 0
 
-[node name="Dash" type="Node" parent="StateMachine"]
+[node name="Dash" type="Node3D" parent="StateMachine" unique_id=783819148]
 script = ExtResource("5_whtj7")
 physics_type = 4
 has_set_frame_duration = true
 set_frame_duration = 20
 
-[node name="Run" type="Node" parent="StateMachine"]
+[node name="Run" type="Node3D" parent="StateMachine" unique_id=699048412]
 script = ExtResource("6_jip32")
 
-[node name="RunTurnaround" type="Node" parent="StateMachine"]
+[node name="RunTurnaround" type="Node3D" parent="StateMachine" unique_id=216604406]
 script = ExtResource("10_t68dc")
 physics_type = 4
 has_set_frame_duration = true
 set_frame_duration = 22
 
-[node name="CrouchStart" type="Node" parent="StateMachine"]
+[node name="CrouchStart" type="Node3D" parent="StateMachine" unique_id=2080184483]
 script = ExtResource("9_l2sht")
 physics_type = 1
 has_set_frame_duration = true
 set_frame_duration = 4
 
-[node name="Crouch" type="Node" parent="StateMachine"]
+[node name="Crouch" type="Node3D" parent="StateMachine" unique_id=1755016994]
 script = ExtResource("9_whtj7")
 physics_type = 1
 
-[node name="CrouchRelease" type="Node" parent="StateMachine"]
+[node name="CrouchRelease" type="Node3D" parent="StateMachine" unique_id=628366206]
 script = ExtResource("11_qa7di")
 physics_type = 1
 has_set_frame_duration = true
 set_frame_duration = 5
 
-[node name="JumpSquat" type="Node" parent="StateMachine"]
+[node name="JumpSquat" type="Node3D" parent="StateMachine" unique_id=1203248965]
 script = ExtResource("10_3my5x")
 physics_type = 4
 flush_inputs_on_enter = true
@@ -121,63 +134,100 @@ has_set_frame_duration = true
 set_frame_duration = 4
 gameplay_action = ExtResource("13_31emv")
 
-[node name="ShortHop" type="Node" parent="StateMachine"]
+[node name="ShortHop" type="Node3D" parent="StateMachine" unique_id=1643551514]
 script = ExtResource("13_qa7di")
 physics_type = 2
 
-[node name="FullHop" type="Node" parent="StateMachine"]
+[node name="FullHop" type="Node3D" parent="StateMachine" unique_id=466466660]
 script = ExtResource("11_i3vkc")
 physics_type = 2
 
-[node name="DoubleJump" type="Node" parent="StateMachine"]
+[node name="DoubleJump" type="Node3D" parent="StateMachine" unique_id=1764659568]
 script = ExtResource("12_hdt70")
 physics_type = 2
 
-[node name="Fall" type="Node" parent="StateMachine"]
+[node name="Fall" type="Node3D" parent="StateMachine" unique_id=832241982]
 script = ExtResource("13_rwyh5")
 
-[node name="Land" type="Node" parent="StateMachine"]
+[node name="Land" type="Node3D" parent="StateMachine" unique_id=1112408007]
 script = ExtResource("14_4blb1")
 
-[node name="Jab" type="Node" parent="StateMachine"]
+[node name="Freefall" type="Node3D" parent="StateMachine" unique_id=1546834148]
+script = ExtResource("21_xj6o5")
+physics_type = 2
 
-[node name="Jab2" type="Node" parent="StateMachine"]
+[node name="Jab" type="Node3D" parent="StateMachine" unique_id=1834672345]
+script = ExtResource("22_r6xks")
+startup = 3
+endlag = 20
+physics_type = 4
+gameplay_action = ExtResource("23_6n7n1")
 
-[node name="Jab3" type="Node" parent="StateMachine"]
+[node name="HitWindow0" type="Area3D" parent="StateMachine/Jab" unique_id=1702226916]
+collision_layer = 32
+collision_mask = 64
 
-[node name="Nair" type="Node" parent="StateMachine"]
+[node name="JabHitbox0" type="CollisionShape3D" parent="StateMachine/Jab/HitWindow0" unique_id=1052789527]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.779, 1.105, 0)
+shape = SubResource("SphereShape3D_6n7n1")
+debug_color = Color(0.989497, 0, 0.29520148, 0.41960785)
+script = ExtResource("24_h1ln2")
 
-[node name="DashAttack" type="Node" parent="StateMachine"]
+[node name="Jab2" type="Node3D" parent="StateMachine" unique_id=567301780]
+script = ExtResource("25_ofar5")
 
-[node name="USpec" type="Node" parent="StateMachine"]
+[node name="HitWindow0" type="Area3D" parent="StateMachine/Jab2" unique_id=1280259158]
 
-[node name="Shield" type="Node" parent="StateMachine"]
+[node name="Jab1Hitbox" type="CollisionShape3D" parent="StateMachine/Jab2/HitWindow0" unique_id=2020594200]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.871, 1.105, 0)
+shape = SubResource("SphereShape3D_6n7n1")
+debug_color = Color(0.989497, 0, 0.29520148, 0.41960785)
+script = ExtResource("24_h1ln2")
+
+[node name="Jab3" type="Node3D" parent="StateMachine" unique_id=897891792]
+script = ExtResource("26_iccai")
+
+[node name="HitWindow0" type="Area3D" parent="StateMachine/Jab3" unique_id=1451272793]
+
+[node name="Jab2Hitbox" type="CollisionShape3D" parent="StateMachine/Jab3/HitWindow0" unique_id=1781381799]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.89288247, 0.5743826, 0)
+shape = SubResource("SphereShape3D_ofar5")
+debug_color = Color(0.989497, 0, 0.29520148, 0.41960785)
+script = ExtResource("24_h1ln2")
+
+[node name="Nair" type="Node3D" parent="StateMachine" unique_id=154224022]
+
+[node name="DashAttack" type="Node3D" parent="StateMachine" unique_id=672799706]
+
+[node name="USpec" type="Node3D" parent="StateMachine" unique_id=751395456]
+
+[node name="Shield" type="Node3D" parent="StateMachine" unique_id=1405697009]
 script = ExtResource("15_t68dc")
 physics_type = 1
 flush_inputs_on_enter = true
 gameplay_action = ExtResource("20_i3vkc")
 
-[node name="ShieldRelease" type="Node" parent="StateMachine"]
+[node name="ShieldRelease" type="Node3D" parent="StateMachine" unique_id=1513305475]
 script = ExtResource("21_i3vkc")
 physics_type = 1
 has_set_frame_duration = true
 set_frame_duration = 10
 
-[node name="ShieldBreak" type="Node" parent="StateMachine"]
+[node name="ShieldBreak" type="Node3D" parent="StateMachine" unique_id=1710672920]
 script = ExtResource("23_rwyh5")
 physics_type = 1
 has_set_frame_duration = true
 set_frame_duration = 180
 
-[node name="RollLeft" type="Node" parent="StateMachine"]
+[node name="RollLeft" type="Node3D" parent="StateMachine" unique_id=1766425071]
 
-[node name="RollRight" type="Node" parent="StateMachine"]
+[node name="RollRight" type="Node3D" parent="StateMachine" unique_id=224170797]
 
-[node name="Flinch" type="Node" parent="StateMachine"]
+[node name="Flinch" type="Node3D" parent="StateMachine" unique_id=642820681]
 
-[node name="Tumble" type="Node" parent="StateMachine"]
+[node name="Tumble" type="Node3D" parent="StateMachine" unique_id=390426867]
 
-[node name="Airdodge" type="Node" parent="StateMachine"]
+[node name="Airdodge" type="Node3D" parent="StateMachine" unique_id=1166455637]
 script = ExtResource("23_4blb1")
 startup = 2
 active_frames = Array[int]([15])
@@ -185,4 +235,4 @@ endlag = 20
 apply_gravity = false
 physics_type = 4
 
-[node name="Wavedash" type="Node" parent="StateMachine"]
+[node name="Wavedash" type="Node3D" parent="StateMachine" unique_id=719676962]

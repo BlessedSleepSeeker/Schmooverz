@@ -21,18 +21,35 @@ var raw_input: float = 0.0
 var facing_direction: bool = true:
 	set(value):
 		facing_direction = value
+		state_machine.flip_states(facing_direction)
+
+var snap_to: Node3D = null
+var should_snap: bool = false:
+	set(value):
+		should_snap = value
 
 signal platdrop
-
+signal register_should_snap
 
 func _ready():
 	orient_skin()
+	if not airdodge_snap_area.body_entered.is_connected(toggle_waveland_snap.bind(true)):
+		airdodge_snap_area.body_entered.connect(toggle_waveland_snap.bind(true))
+	if not airdodge_snap_area.body_exited.is_connected(toggle_waveland_snap.bind(false)):
+		airdodge_snap_area.body_exited.connect(toggle_waveland_snap.bind(false))
 
 func play_animation(animation_name: String) -> void:
 	skin.travel(animation_name)
 
 func is_airborne() -> bool:
 	return not self.is_on_floor()
+
+func toggle_waveland_snap(body: Node3D, value: bool) -> void:
+	should_snap = value
+	snap_to = body
+	if should_snap:
+		register_should_snap.emit()
+	debug_hud.update_snap(should_snap)
 
 func orient_skin() -> void:
 	skin.look_to(facing_direction)

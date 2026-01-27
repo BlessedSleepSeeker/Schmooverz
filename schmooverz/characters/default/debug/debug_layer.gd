@@ -1,17 +1,22 @@
 extends CanvasLayer
 class_name CharacterDebugHUD
 
+@export var snap_template: String = "Snap Status : %s"
 @export var frame_template: String = "Total Time/Frame [%.03f:%d]"
 @export var state_template: String = "%s [%d/%d]"
 @export var shield_template: String = "Shield Health [%.03f/%.03f]"
 @export var position_template: String = "Position = [%.04f:%.04f] (%.04f:%.04f)"
 
+@onready var snap_label: RichTextLabel = %ShouldSnap
 @onready var frame_label: RichTextLabel = %FrameLabel
 @onready var state_label: RichTextLabel = %StateLabel
 @onready var shield_label: RichTextLabel = %ShieldLabel
 @onready var position_label: RichTextLabel = %PositionLabel
 
 @onready var input_list: RichTextLabel = %InputsList
+
+func update_snap(value: bool) -> void:
+	snap_label.text = snap_template % value
 
 func update_state(state_name: String, state_frame: int, state_duration: int) -> void:
 	state_label.text = state_template % [state_name, state_frame, state_duration]

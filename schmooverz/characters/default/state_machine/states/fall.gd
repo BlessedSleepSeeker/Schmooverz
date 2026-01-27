@@ -21,7 +21,7 @@ func physics_update(_delta: float, _move_character: bool = true) -> void:
 	if input_converter.can_trigger_action("shield"):
 		state_machine.transition_to("Airdodge")
 	if character.is_on_floor():
-		state_machine.transition_to("Land")
+		state_machine.transition_to("Land", {"landing_lag": 8 if character.physics_parameters.is_fastfalling else 4})
 	
 
 func exit() -> void:

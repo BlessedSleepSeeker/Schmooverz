@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 class_name StateMachine
 
 signal transitioned(state_name)
@@ -34,6 +34,11 @@ func _physics_process(delta: float) -> void:
 	state.physics_update(delta)
 	owner.debug_hud.update_state(state.name, state.frame_count, state.set_frame_duration)
 	owner.debug_hud.update_position(owner.global_position, owner.velocity)
+
+func flip_states(direction: bool) -> void:
+	for child in get_children():
+		if child is CharacterState:
+			child.flip_hitboxes(direction)
 
 func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	if not has_node(target_state_name):
