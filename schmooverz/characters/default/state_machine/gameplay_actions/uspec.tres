@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GameplayAction" load_steps=2 format=3 uid="uid://dn41s20n817lh"]
+[gd_resource type="Resource" script_class="GameplayAction" format=3 uid="uid://dn41s20n817lh"]
 
 [ext_resource type="Script" uid="uid://csc6qane275eg" path="res://characters/default/state_machine/gameplay_action.gd" id="1_8k7os"]
 
@@ -6,6 +6,6 @@
 script = ExtResource("1_8k7os")
 name = "uspec"
 button_inputs = Array[String](["special"])
-min_direction_input = Vector2(-0.5, -0.2)
-max_direction_input = Vector2(0.5, -1)
+min_direction_input = Vector2(-1, 0.2)
+max_direction_input = Vector2(1, 1)
 metadata/_custom_type_script = "uid://csc6qane275eg"

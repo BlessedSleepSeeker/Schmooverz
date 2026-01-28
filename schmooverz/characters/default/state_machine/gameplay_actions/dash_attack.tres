@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GameplayAction" load_steps=2 format=3 uid="uid://pvacjh1xwhms"]
+[gd_resource type="Resource" script_class="GameplayAction" format=3 uid="uid://pvacjh1xwhms"]
 
 [ext_resource type="Script" uid="uid://csc6qane275eg" path="res://characters/default/state_machine/gameplay_action.gd" id="1_qttrn"]
 

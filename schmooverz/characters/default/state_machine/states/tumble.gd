@@ -1,16 +1,4 @@
-extends CharacterStateAttack
-
-func during_startup():
-	pass
-
-func during_active_frame(_index: int):
-	super(_index)
-
-func during_inactive_frame(_index: int):
-	super(_index)
-
-func during_endlag():
-	super()
+extends BaseEntityState
 
 func enter(_msg = {}):
 	super()
@@ -20,12 +8,14 @@ func unhandled_input(_event: InputEvent):
 
 func physics_update(_delta, _move_character: bool = true):
 	super(_delta)
+	if not character.is_airborne():
+		state_machine.transition_to("Idle")
 
 func exit():
 	pass
 
 func on_frame_count_reached():
-	state_machine.transition_to("Idle")
+	pass
 
 func _notification(_what):
 	pass

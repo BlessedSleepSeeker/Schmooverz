@@ -2,7 +2,7 @@
 extends Node3D
 class_name State
 
-var state_machine: StateMachine = null
+var state_machine: BaseStateMachine = null
 
 func input(_event: InputEvent) -> void:
 	pass

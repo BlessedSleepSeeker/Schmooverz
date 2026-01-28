@@ -18,6 +18,10 @@ func physics_update(_delta: float, _move_character: bool = true) -> void:
 	super(_delta)
 	if input_converter.can_trigger_action("jump") && character.physics_parameters.can_double_jump:
 		state_machine.transition_to("DoubleJump")
+
+	if input_converter.can_trigger_action("uspec"):
+		state_machine.transition_to("USpec")
+
 	if input_converter.can_trigger_action("shield"):
 		state_machine.transition_to("Airdodge")
 	if character.is_on_floor():

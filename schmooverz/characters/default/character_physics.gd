@@ -48,6 +48,7 @@ class_name CharacterPhysics
 @export_group("Defensive")
 @export var WEIGHT: int = 82
 @export var HITSTUN_GRAVITY: float = 1.55
+@export var KNOCKBACK_SPEED_DECREASE: float = 0.54
 @export var ROLL_INITIAL_SPEED: float = 26.5
 #endregion
 

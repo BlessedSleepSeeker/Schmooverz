@@ -1,16 +1,4 @@
-extends CharacterStateAttack
-
-func during_startup():
-	pass
-
-func during_active_frame(_index: int):
-	super(_index)
-
-func during_inactive_frame(_index: int):
-	super(_index)
-
-func during_endlag():
-	super()
+extends BaseEntityState
 
 func enter(_msg = {}):
 	super()
@@ -25,7 +13,7 @@ func exit():
 	pass
 
 func on_frame_count_reached():
-	state_machine.transition_to("Idle")
+	pass
 
 func _notification(_what):
 	pass

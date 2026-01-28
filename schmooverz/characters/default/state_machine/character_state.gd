@@ -1,25 +1,8 @@
 @abstract
 class_name CharacterState
-extends State
+extends BaseEntityState
 
-var character: CharacterInstance
-
-enum PhysicsType {
-	GROUNDED_ALL,
-	GROUNDED_ONLY_FRICTION,
-	AERIAL_ALL,
-	AERIAL_ONLY_FRICTION,
-	SPECIAL
-}
-
-@export var default_physics: bool = true
-@export var apply_gravity: bool = true
-@export var physics_type: PhysicsType = PhysicsType.GROUNDED_ALL
-
-@export var should_play_animation_on_enter: bool = true
 @export var flush_inputs_on_enter: bool = false
-@export var has_set_frame_duration: bool = false
-@export var set_frame_duration: int = 0
 
 @export_group("Parameters")
 #@export var physics_parameters: CharacterPhysics = CharacterPhysics.new()
@@ -31,54 +14,16 @@ var input_converter: InputConverter = null
 func _ready() -> void:
 	character = owner as CharacterInstance
 
-var frame_count: int = 0
-var first_actionable_frame: int = 0
-
 func enter(_msg := {}) -> void:
-	if should_play_animation_on_enter:
-		play_animation()
+	super()
 	if flush_inputs_on_enter:
 		gameplay_action.flush_buffer_for_actions()
-	frame_count = 0
-
 
 func input(_event: InputEvent) -> void:
-	pass
+	super(_event)
 
 func unhandled_input(_event: InputEvent) -> void:
-	pass
-
-func move_x_toward_by_frame(movement_direction: Vector3, step: float) -> void:
-	if character.velocity.x == movement_direction.x:
-		return
-	var _direction: bool = character.velocity.x < movement_direction.x
-	if _direction:
-		character.velocity.x += step
-		if character.velocity.x > movement_direction.x:
-			character.velocity.x = movement_direction.x
-	else:
-		character.velocity.x -= step
-		if character.velocity.x < movement_direction.x:
-			character.velocity.x = movement_direction.x
-
-func move_y_toward_by_frame(movement_direction: Vector3, step: float) -> void:
-	if character.velocity.y == movement_direction.y:
-		return
-	var _direction: bool = character.velocity.y < movement_direction.y
-	if _direction:
-		character.velocity.y += step
-		if character.velocity.y > movement_direction.y:
-			character.velocity.y = movement_direction.y
-	else:
-		character.velocity.y -= step
-		if character.velocity.y < movement_direction.y:
-			character.velocity.y = movement_direction.y
-
-func flip_hitboxes(direction: bool) -> void:
-	if direction:
-		self.rotation_degrees.y = 0
-	else:
-		self.rotation_degrees.y = 180
+	super(_event)
 
 func physics_update(_delta: float, move_character: bool = true) -> void:
 	#var test: Vector3 = Vector3(10, 10, 10)
@@ -122,26 +67,12 @@ func physics_update(_delta: float, move_character: bool = true) -> void:
 
 		if move_character:
 			character.move_and_slide()
-	# if character.debug_canvas:
-	# 	character.debug_canvas.set_speedometer(character.velocity)
-	# 	character.debug_canvas.set_world_position(character.position)
-	## Reseting raw input
-	character.raw_input = 0.0
 	frame_count += 1
-	if frame_count == set_frame_duration:
+	if frame_count == set_frame_duration && has_set_frame_duration:
 		on_frame_count_reached()
 
-func can_act_out_of_state() -> bool:
-	return frame_count >= first_actionable_frame
-
 func exit() -> void:
-	pass
-
-func play_animation(_anim_name: String = "") -> void:
-	if _anim_name:
-		character.play_animation(_anim_name)
-	else:
-		character.play_animation(self.name)
+	super()
 
 func on_frame_count_reached() -> void:
-	pass
+	super()

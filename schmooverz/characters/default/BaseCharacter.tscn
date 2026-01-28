@@ -32,6 +32,9 @@
 [ext_resource type="Script" uid="uid://o7m2p41lgybe" path="res://characters/default/hitboxes/hitbox_group.gd" id="24_iccai"]
 [ext_resource type="Script" uid="uid://n0i81coco3yc" path="res://characters/default/state_machine/states/jab_2.gd" id="25_ofar5"]
 [ext_resource type="Script" uid="uid://c1hpkbdgdlfh7" path="res://characters/default/state_machine/states/jab_3.gd" id="26_iccai"]
+[ext_resource type="Script" uid="uid://cjr3jlstvj258" path="res://characters/default/state_machine/states/dash_attack.gd" id="28_05pfc"]
+[ext_resource type="Resource" uid="uid://pvacjh1xwhms" path="res://characters/default/state_machine/gameplay_actions/dash_attack.tres" id="29_tkqk2"]
+[ext_resource type="Script" uid="uid://dnw3wxat7ffve" path="res://characters/default/u_spec.gd" id="30_ebyvq"]
 
 [sub_resource type="Curve" id="Curve_t68dc"]
 _data = [Vector2(0, 1), 0.0, -1.1191607, 0, 0, Vector2(1, 0), -1.1183406, 0.0, 0, 0]
@@ -54,6 +57,14 @@ radius = 0.3
 [sub_resource type="SphereShape3D" id="SphereShape3D_ofar5"]
 radius = 0.38638464
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_05pfc"]
+radius = 0.3017578
+height = 1.5913086
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8yaho"]
+radius = 0.7910156
+height = 2.7524414
+
 [node name="BaseCharacter" type="CharacterBody3D" unique_id=1518537142]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 collision_mask = 4
@@ -70,7 +81,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 shape = SubResource("BoxShape3D_t68dc")
 
-[node name="CharacterSkin" parent="." unique_id=587719509 instance=ExtResource("1_3jlki")]
+[node name="CharacterSkin" parent="." unique_id=560900249 instance=ExtResource("1_3jlki")]
 unique_name_in_owner = true
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 
@@ -129,11 +140,11 @@ set_frame_duration = 5
 
 [node name="JumpSquat" type="Node3D" parent="StateMachine" unique_id=1203248965]
 script = ExtResource("10_3my5x")
-physics_type = 4
 flush_inputs_on_enter = true
+gameplay_action = ExtResource("13_31emv")
+physics_type = 4
 has_set_frame_duration = true
 set_frame_duration = 4
-gameplay_action = ExtResource("13_31emv")
 
 [node name="ShortHop" type="Node3D" parent="StateMachine" unique_id=1643551514]
 script = ExtResource("13_qa7di")
@@ -159,11 +170,13 @@ physics_type = 2
 
 [node name="Jab" type="Node3D" parent="StateMachine" unique_id=1834672345]
 script = ExtResource("22_r6xks")
-startup = 3
-endlag = 20
-iasa_frame = 9
-physics_type = 4
+x_displacement_by_frame = 1.3
+startup = 5
+endlag = 14
+iasa_frame = 6
+flush_inputs_on_enter = true
 gameplay_action = ExtResource("23_6n7n1")
+physics_type = 4
 
 [node name="HitWindow0" type="Area3D" parent="StateMachine/Jab" unique_id=1702226916]
 collision_layer = 32
@@ -175,12 +188,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.779, 1.105, 0)
 shape = SubResource("SphereShape3D_6n7n1")
 debug_color = Color(0.989497, 0, 0.29520148, 0.41960785)
 script = ExtResource("24_h1ln2")
+damage = 3.0
 
 [node name="Jab2" type="Node3D" parent="StateMachine" unique_id=567301780]
 script = ExtResource("25_ofar5")
-startup = 3
-endlag = 20
-iasa_frame = 9
+x_displacement_by_frame = 1.3
+startup = 4
+endlag = 16
+iasa_frame = 6
+flush_inputs_on_enter = true
+gameplay_action = ExtResource("23_6n7n1")
+physics_type = 4
 
 [node name="HitWindow0" type="Area3D" parent="StateMachine/Jab2" unique_id=1280259158]
 collision_layer = 32
@@ -192,12 +210,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.871, 1.105, 0)
 shape = SubResource("SphereShape3D_6n7n1")
 debug_color = Color(0.989497, 0, 0.29520148, 0.41960785)
 script = ExtResource("24_h1ln2")
+damage = 3.0
+knockback_angle = 50.0
 
 [node name="Jab3" type="Node3D" parent="StateMachine" unique_id=897891792]
 script = ExtResource("26_iccai")
-startup = 3
-endlag = 25
-iasa_frame = 13
+x_displacement_by_frame = 1.8
+startup = 6
+endlag = 17
+iasa_frame = 10
+flush_inputs_on_enter = true
+gameplay_action = ExtResource("23_6n7n1")
+physics_type = 4
 
 [node name="HitWindow0" type="Area3D" parent="StateMachine/Jab3" unique_id=1451272793]
 collision_layer = 32
@@ -209,18 +233,69 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.89288247, 0.5743826, 0)
 shape = SubResource("SphereShape3D_ofar5")
 debug_color = Color(0.989497, 0, 0.29520148, 0.41960785)
 script = ExtResource("24_h1ln2")
+damage = 6.0
+knockback_angle = 55.0
+knockback_base = 6.0
+knockback_scaling = 0.5
+min_hitpause = 9
+self_hitpause = 9
+
+[node name="DashAttack" type="Node3D" parent="StateMachine" unique_id=672799706]
+script = ExtResource("28_05pfc")
+startup = 3
+active_frames = Array[int]([10])
+endlag = 18
+iasa_frame = 16
+gameplay_action = ExtResource("29_tkqk2")
+
+[node name="HitWindow0" type="Area3D" parent="StateMachine/DashAttack" unique_id=1097258291]
+collision_layer = 32
+collision_mask = 64
+script = ExtResource("24_iccai")
+
+[node name="DashAttackHitbox0" type="CollisionShape3D" parent="StateMachine/DashAttack/HitWindow0" unique_id=418402679]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8401934, 0.7787283, 0)
+shape = SubResource("CapsuleShape3D_05pfc")
+debug_color = Color(0.989497, 0, 0.29520148, 0.41960785)
+script = ExtResource("24_h1ln2")
+damage = 6.0
+knockback_angle = 55.0
+knockback_base = 6.0
+knockback_scaling = 0.5
+
+[node name="USpec" type="Node3D" parent="StateMachine" unique_id=751395456]
+script = ExtResource("30_ebyvq")
+startup = 5
+active_frames = Array[int]([4])
+endlag = 25
+iasa_frame = 25
+apply_gravity = false
+physics_type = 4
+
+[node name="HitWindow0" type="Area3D" parent="StateMachine/USpec" unique_id=346464681]
+collision_layer = 32
+collision_mask = 64
+script = ExtResource("24_iccai")
+
+[node name="USpecHitbox0" type="CollisionShape3D" parent="StateMachine/USpec/HitWindow0" unique_id=1633254133]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01545918, 1.6224592, 0)
+shape = SubResource("CapsuleShape3D_8yaho")
+debug_color = Color(0.989497, 0, 0.29520148, 0.41960785)
+script = ExtResource("24_h1ln2")
+damage = 8.0
+knockback_angle = 90.0
+knockback_base = 6.0
+knockback_scaling = 1.08
+self_hitpause = 8
+hitpause_multiplier = 2.0
 
 [node name="Nair" type="Node3D" parent="StateMachine" unique_id=154224022]
 
-[node name="DashAttack" type="Node3D" parent="StateMachine" unique_id=672799706]
-
-[node name="USpec" type="Node3D" parent="StateMachine" unique_id=751395456]
-
 [node name="Shield" type="Node3D" parent="StateMachine" unique_id=1405697009]
 script = ExtResource("15_t68dc")
-physics_type = 1
 flush_inputs_on_enter = true
 gameplay_action = ExtResource("20_i3vkc")
+physics_type = 1
 
 [node name="ShieldRelease" type="Node3D" parent="StateMachine" unique_id=1513305475]
 script = ExtResource("21_i3vkc")
@@ -239,6 +314,8 @@ set_frame_duration = 180
 [node name="RollRight" type="Node3D" parent="StateMachine" unique_id=224170797]
 
 [node name="Flinch" type="Node3D" parent="StateMachine" unique_id=642820681]
+
+[node name="Hitstun" type="Node3D" parent="StateMachine" unique_id=1808788383]
 
 [node name="Tumble" type="Node3D" parent="StateMachine" unique_id=390426867]
 

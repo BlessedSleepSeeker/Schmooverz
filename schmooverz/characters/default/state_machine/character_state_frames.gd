@@ -68,10 +68,10 @@ func physics_update(_delta, _move_character: bool = true):
 	super(_delta)
 
 func exit():
-	pass
+	super()
 
 func on_frame_count_reached():
-	pass
+	super()
 
 func _notification(_what):
 	pass

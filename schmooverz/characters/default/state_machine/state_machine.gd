@@ -1,12 +1,5 @@
-extends Node3D
+extends BaseStateMachine
 class_name StateMachine
-
-signal transitioned(state_name)
-
-@export var initial_state := NodePath()
-
-@onready var state: CharacterState = get_node(initial_state)
-
 
 func _ready() -> void:
 	await owner.ready
@@ -22,16 +15,16 @@ func _ready() -> void:
 	state.enter()
 
 func _input(event: InputEvent) -> void:
-	state.input(event)
+	super(event)
 
 func _unhandled_input(event: InputEvent) -> void:
-	state.unhandled_input(event)
+	super(event)
 
 func _process(delta: float) -> void:
-	state.update(delta)
+	super(delta)
 
 func _physics_process(delta: float) -> void:
-	state.physics_update(delta)
+	super(delta)
 	owner.debug_hud.update_state(state.name, state.frame_count, state.set_frame_duration)
 	owner.debug_hud.update_position(owner.global_position, owner.velocity)
 
@@ -48,5 +41,5 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	state.exit()
 	state = get_node(target_state_name)
 	state.enter(msg)
-	FramePrint.prt("Entering %s" % state.name)
+	FramePrint.prt("Entering %s with dict %s" % [state.name, msg])
 	transitioned.emit(state.name)

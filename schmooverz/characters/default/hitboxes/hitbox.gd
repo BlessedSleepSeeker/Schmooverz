@@ -1,10 +1,10 @@
 extends CollisionShape3D
 class_name Hitbox
 
-
 enum HitboxType {
 	CLASSIC,
-	SPECIAL
+	SPECIAL,
+	GRAB
 }
 
 @export var hitbox_type: HitboxType = HitboxType.CLASSIC
@@ -15,21 +15,30 @@ enum HitboxType {
 @export var knockback_base: float = 4.0
 @export var knockback_scaling: float = 0.0
 
+@export_group("Hitpause")
+@export var min_hitpause: int = 3
+@export var max_hitpause: int = 24
+@export var self_hitpause: int = 3
+@export var hitpause_multiplier: float = 1
+
+@export_group("Debug")
 @export var string_template: String = "%s [%s, %.1f, %f, %.2f, %.2f]"
 
 var is_active: bool = false:
 	set(value):
 		is_active = value
+		# FramePrint.prt("%s IS NOW ACTIVE" % name)
 		if is_active:
-			print("check from active")
 			trigger_check()
 
 var last_body: Node3D = null:
 	set(value):
 		last_body = value
 		if last_body != null:
-			print("check from body")
+			# FramePrint.prt("%s HAS REGISTERED BODY %s" % [name, last_body])
 			trigger_check()
+		# else:
+			# FramePrint.prt("%s UNREGISTERED BODY %s" % [name, last_body])
 
 var sent_trigger_this_activation: bool = false
 
@@ -42,5 +51,3 @@ func trigger_check() -> void:
 	if last_body != null && is_active && not sent_trigger_this_activation:
 		hitbox_triggered.emit(last_body, self)
 		sent_trigger_this_activation = true
-	# else:
-	# 	print("%s Cant send trigger cause %s %s %s" % [self.name, last_body != null, not is_active, sent_trigger_this_activation])

@@ -17,9 +17,14 @@ func physics_update(_delta, _move_character: bool = true):
 		state_machine.transition_to("DoubleJump")
 	if input_converter.can_trigger_action("shield"):
 		state_machine.transition_to("Airdodge")
+
+	if input_converter.can_trigger_action("uspec"):
+		state_machine.transition_to("USpec")
+
 	if character.velocity.y < 0:
 		state_machine.transition_to("Fall")
 		#FramePrint.prt(character.global_position.y)
+	
 
 func exit():
 	pass

@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://obfi4psu4312"]
 
 [ext_resource type="Script" uid="uid://b7e484riraxip" path="res://characters/punching_bag/punching_bag.gd" id="1_en4ws"]
+[ext_resource type="Script" uid="uid://brvuwxyomwqjc" path="res://characters/common/base_state_machine.gd" id="2_6liij"]
+[ext_resource type="Script" uid="uid://b0ompt8neewqe" path="res://characters/common/control_interface.gd" id="2_f1opi"]
+[ext_resource type="Script" uid="uid://cc08uwqdup01y" path="res://characters/punching_bag/states/idle_static.gd" id="3_6liij"]
+[ext_resource type="Script" uid="uid://cl12oc6vyhusl" path="res://characters/default/state_machine/states/hitstun.gd" id="5_4l4tp"]
+[ext_resource type="Script" uid="uid://lrr8kj6oqpyh" path="res://characters/default/state_machine/states/tumble.gd" id="6_6liij"]
+[ext_resource type="Script" uid="uid://5m1hdmywr4kk" path="res://characters/default/state_machine/states/hitstun_flinch.gd" id="7_4l4tp"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_m8oyl"]
 
@@ -18,3 +24,27 @@ mesh = SubResource("CapsuleMesh_m8oyl")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1364640476]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9892757, 0)
 shape = SubResource("CapsuleShape3D_m8oyl")
+
+[node name="ControlInterface" type="Node" parent="." unique_id=1169766323]
+script = ExtResource("2_f1opi")
+metadata/_custom_type_script = "uid://b0ompt8neewqe"
+
+[node name="StateMachine" type="Node3D" parent="." unique_id=481223368]
+unique_name_in_owner = true
+script = ExtResource("2_6liij")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node3D" parent="StateMachine" unique_id=1412266476]
+script = ExtResource("3_6liij")
+
+[node name="Hitstun" type="Node3D" parent="StateMachine" unique_id=1467491]
+script = ExtResource("5_4l4tp")
+default_physics = false
+physics_type = 4
+
+[node name="HitstunFlinch" type="Node3D" parent="StateMachine" unique_id=1387060793]
+script = ExtResource("7_4l4tp")
+
+[node name="Tumble" type="Node3D" parent="StateMachine" unique_id=586712976]
+script = ExtResource("6_6liij")
+physics_type = 2

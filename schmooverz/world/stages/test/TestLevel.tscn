@@ -54,3 +54,6 @@ lenght = 10.0
 
 [node name="PunchingBag" parent="." unique_id=342280193 instance=ExtResource("6_eod7b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.912325, 0, 0)
+
+[node name="PunchingBag2" parent="." unique_id=1583502854 instance=ExtResource("6_eod7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.182745, 3.9705648, 0)

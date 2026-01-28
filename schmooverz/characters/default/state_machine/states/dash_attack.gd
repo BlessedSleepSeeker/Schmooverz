@@ -1,19 +1,16 @@
 extends CharacterStateAttack
 
-func during_startup():
-	pass
-
-func during_active_frame(_index: int):
-	super(_index)
-
-func during_inactive_frame(_index: int):
-	super(_index)
-
-func during_endlag():
+func during_startup() -> void:
 	super()
-	if can_iasa():
-		if input_converter.can_trigger_action("jab"):
-			state_machine.transition_to("Jab3")
+
+func during_active_frame(_index: int) -> void:
+	super(_index)
+
+func during_inactive_frame(_index: int) -> void:
+	super(_index)
+
+func during_endlag() -> void:
+	super()
 
 func enter(_msg = {}):
 	super()
@@ -25,9 +22,10 @@ func physics_update(_delta, _move_character: bool = true):
 	super(_delta)
 
 func exit():
-	pass
+	super()
 
 func on_frame_count_reached():
+	super()
 	state_machine.transition_to("Idle")
 
 func _notification(_what):

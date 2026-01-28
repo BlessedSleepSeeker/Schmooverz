@@ -11,6 +11,8 @@ func physics_update(_delta: float, _move_character: bool = true) -> void:
 	super(_delta)
 	if character.is_airborne():
 		state_machine.transition_to("Fall")
+	if input_converter.can_trigger_action("uspec"):
+		state_machine.transition_to("USpec")
 
 func exit() -> void:
 	pass

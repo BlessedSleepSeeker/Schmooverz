@@ -28,13 +28,15 @@ func _on_hitbox_triggered(body: Node3D, hitbox: Hitbox) -> void:
 
 func activate() -> void:
 	if is_active == false:
+		# FramePrint.prt("ACTIVATING %s.%s" % [get_parent().name, name])
 		is_active = true
 		for child: Hitbox in self.get_children():
 			child.is_active = true
 
 func deactivate() -> void:
 	if is_active == true:
+		# FramePrint.prt("DEACTIVATING %s.%s" % [get_parent().name, name])
 		is_active = false
 		for child: Hitbox in self.get_children():
-			child.is_active = true
+			child.is_active = false
 			child.sent_trigger_this_activation = false

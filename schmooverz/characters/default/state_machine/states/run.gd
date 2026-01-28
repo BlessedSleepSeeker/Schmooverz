@@ -16,10 +16,14 @@ func physics_update(_delta: float, _move_character: bool = true) -> void:
 		state_machine.transition_to("Fall")
 	if character.velocity == Vector3.ZERO:
 		state_machine.transition_to("Idle")
-	if Buffer.is_action_press_buffered("jump"):
+	if input_converter.can_trigger_action("jump"):
 		state_machine.transition_to("JumpSquat")
-	if Buffer.is_action_press_buffered("attack"):
-		state_machine.transition_to("AttackDispatcher")
+
+	if input_converter.can_trigger_action("dash_attack"):
+		state_machine.transition_to("DashAttack")
+	if input_converter.can_trigger_action("uspec"):
+		state_machine.transition_to("USpec")
+
 	if Buffer.is_action_press_buffered("shield"):
 		state_machine.transition_to("Shield")
 	if input_converter.stick_position.y < 0:

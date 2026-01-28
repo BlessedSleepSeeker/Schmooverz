@@ -24,6 +24,8 @@ func physics_update(_delta: float, _move_character: bool = true) -> void:
 		state_machine.transition_to("JumpSquat")
 	if input_converter.can_trigger_action("shield"):
 		state_machine.transition_to("Shield")
+	if input_converter.can_trigger_action("uspec"):
+		state_machine.transition_to("USpec")
 
 func exit() -> void:
 	pass

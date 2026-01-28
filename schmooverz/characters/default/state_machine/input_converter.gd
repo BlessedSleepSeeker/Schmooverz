@@ -1,4 +1,4 @@
-extends Node
+extends ControlInterface
 class_name InputConverter
 
 ## Used to convert buffered inputs (and combinations) to gameplay actions
@@ -31,9 +31,6 @@ class_name InputConverter
 	Vector2(1, -1), # south west
 	Vector2(1, 1), # north west
 ]
-
-var stick_position: Vector2 = Vector2.ZERO
-var triggerable_actions: Array[GameplayAction] = []
 
 func process_current_movement_stick_position() -> void:
 	stick_position = Vector2.ZERO
